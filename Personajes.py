@@ -44,4 +44,5 @@ class Personaje:
         self.vida = self.vidamax
         self.fuerza += 5
         self.velocidad += 2
-        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??')
+        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??') 
+print 
