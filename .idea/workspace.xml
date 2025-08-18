@@ -5,21 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="911cc1fa-b7f4-4577-b7f7-37d5acf328de" name="Changes" comment="feat : inicializar proyecto con estructura basica">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ProyectoPizza.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Personajes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proyecto-pizza/combate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proyecto-pizza/enemigos.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proyecto-pizza/items.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proyecto-pizza/mazmorras.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proyecto-pizza/utilidades.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/enemigos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/items.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mazmorras.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utilidades.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto-pizza" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto-pizza" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +46,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="319vLo21mPBKli8t5JKjBIemGqa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -61,7 +57,7 @@
   "keyToString": {
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging master",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/annap/Documents/proyecto-pizza",
     "settings.editor.selected.configurable": "vcs.Git"
   }

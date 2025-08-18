@@ -19,6 +19,6 @@ def main():
 
     heroe.ganar_experiencia(60)  #experiencia acumulada --sube de nivel
 
-if __name__ == "__main__":
+if __name__ == "__main__": git
     main()
 
