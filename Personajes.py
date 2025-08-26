@@ -1,7 +1,7 @@
 class Personaje:
-    def __init__(self, nombre, clase):
+    def __init__(self, nombre, tipo):
         self.nombre = nombre
-        self.clase = clase
+        self.tipo = tipo
         self.vida = 100
         self.vidamax = 100
         self.fuerza = 10
@@ -13,7 +13,7 @@ class Personaje:
 
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
-        print(f'Nombre: {self.nombre} - {self.clase}')
+        print(f'Nombre: {self.nombre} - {self.tipo}')
         print(f'Vida: {self.vida} / {self.vidamax}')
         print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
         print(f'Fuerza: {self.fuerza} | Velocidad: {self.velocidad}')
