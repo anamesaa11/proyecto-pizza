@@ -27,7 +27,7 @@ def mover_jugador(direccion, jugador_pos, mapa):
         x -= 1
     elif direccion == "s" and x < filas - 1:  # abajo
         x += 1
-    elif direccion == "a" and y > 0:  # izquierda
+    elif direccion == "a" and y > 0:  #
         y -= 1
     elif direccion == "d" and y < columnas - 1:  # derecha
         y += 1
