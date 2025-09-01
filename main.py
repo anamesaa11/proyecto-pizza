@@ -28,3 +28,27 @@ Plebeyo.mostrar_estado()
 Plebeyo.recibir_dano(30)
 Plebeyo.curar(20)
 Plebeyo.ganar_experiencia(110)
+from mazmorras import mostrar_mapa, mover_jugador
+
+def main():
+    #mapa5x5
+    mapa = [
+        [".", ".", ".", ".", "."],
+        [".", ".", ".", ".", "."],
+        [".", ".", "X", ".", "."],
+        [".", ".", ".", ".", "."],
+        [".", ".", ".", ".", "."],
+    ]
+
+    jugador_pos = (0, 0)
+
+    while True:
+        mostrar_mapa(mapa, jugador_pos)
+        mov = input("Mover (w/a/s/d, q para salir): ")
+        if mov == "q":
+            print("Saliste del juego.")
+            break
+        jugador_pos = mover_jugador(mov, jugador_pos, mapa)
+
+if __name__ == "__main__":
+    main()
