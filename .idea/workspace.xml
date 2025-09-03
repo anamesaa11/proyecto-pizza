@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="911cc1fa-b7f4-4577-b7f7-37d5acf328de" name="Changes" comment="feat : inicializar proyecto con estructura basica  &quot;Agregué a el archivo mazmorras.py con el mapa y el movimiento básico&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +33,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/anamesaa11/proyecto-pizza.git&quot;,
-    &quot;accountId&quot;: &quot;6a8d5dd6-7358-43ad-8b13-4878166a5c24&quot;
+    &quot;accountId&quot;: &quot;3ea8a6d0-535a-48ed-898a-a3bfe1cde133&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -51,13 +52,13 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/annap/Documents/proyecto-pizza",
+    "last_opened_file_path": "D:/Documents/COMPUTACION - ProyectoPizza/main.py",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="proyecto-pizza" />
+      <module name="ProyectoPizza" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -65,8 +66,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_NAME" value="Python 3.12 (COMPUTACION - ProyectoPizza)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
@@ -82,7 +84,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-884f5ed5d46b-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.22855.92" />
+        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
       </set>
     </attachedChunks>
   </component>
@@ -134,16 +136,5 @@
     <MESSAGE value="feat : inicializar proyecto con estructura basica" />
     <MESSAGE value="feat : inicializar proyecto con estructura basica  &quot;Agregué a el archivo mazmorras.py con el mapa y el movimiento básico&quot;" />
     <option name="LAST_COMMIT_MESSAGE" value="feat : inicializar proyecto con estructura basica  &quot;Agregué a el archivo mazmorras.py con el mapa y el movimiento básico&quot;" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/mazmorras.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
