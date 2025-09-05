@@ -23,24 +23,20 @@ from Personajes import Personaje
 #     main()
 
 
-Plebeyo = Personaje('Pizzerito', 'Plebeyo')
-Plebeyo.mostrar_estado()
-Plebeyo.recibir_dano(30)
-Plebeyo.curar(20)
-Plebeyo.ganar_experiencia(110)
-from mazmorras import mostrar_mapa, mover_jugador
+#Plebeyo = Personaje('Pizzerito', 'Plebeyo')
+#Plebeyo.mostrar_estado()
+#Plebeyo.recibir_dano(30)
+#Plebeyo.curar(20)
+#plebeyo.ganar_experiencia(110)
+from mazmorras import mostrar_mapa, mover_jugador, generar_mapa
 
 def main():
-    #mapa5x5
-    mapa = [
-        [".", ".", ".", ".", "."],
-        [".", ".", ".", ".", "."],
-        [".", ".", "X", ".", "."],
-        [".", ".", ".", ".", "."],
-        [".", ".", ".", ".", "."],
-    ]
-
+    # Genero el mapa una sola vez
+    mapa = generar_mapa()
     jugador_pos = (0, 0)
+
+    print("Mazmorra 1 – Pueblo/ciudad 🏘️")
+    print("Callejones llenos de ladrones y clientes exigentes.\n")
 
     while True:
         mostrar_mapa(mapa, jugador_pos)
