@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="911cc1fa-b7f4-4577-b7f7-37d5acf328de" name="Changes" comment="feat : inicializar proyecto con estructura basica  &quot;Agregué a el archivo mazmorras.py con el mapa y el movimiento básico&quot;">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mazmorras.py" beforeDir="false" afterPath="$PROJECT_DIR$/mazmorras.py" afterDir="false" />
+    <list default="true" id="911cc1fa-b7f4-4577-b7f7-37d5acf328de" name="Changes" comment="feat : inicializar proyecto con estructura basica  &quot;modifique del archivo mazmorraz.py el mapa&quot;">
+      <change beforePath="$PROJECT_DIR$/proyecto-pizza" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto-pizza" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +128,21 @@
       <option name="project" value="LOCAL" />
       <updated>1756757773965</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat : inicializar proyecto con estructura basica  &quot;modifique del archivo mazmorraz.py el mapa&quot;">
+      <option name="closed" value="true" />
+      <created>1757112614681</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1757112614682</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat : inicializar proyecto con estructura basica" />
     <MESSAGE value="feat : inicializar proyecto con estructura basica  &quot;Agregué a el archivo mazmorras.py con el mapa y el movimiento básico&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : inicializar proyecto con estructura basica  &quot;Agregué a el archivo mazmorras.py con el mapa y el movimiento básico&quot;" />
+    <MESSAGE value="feat : inicializar proyecto con estructura basica  &quot;modifique del archivo mazmorraz.py el mapa&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : inicializar proyecto con estructura basica  &quot;modifique del archivo mazmorraz.py el mapa&quot;" />
   </component>
 </project>
