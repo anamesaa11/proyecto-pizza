@@ -5,18 +5,20 @@ class Personaje:
         self.vida = 100
         self.vidamax = 100
         self.fuerza = 10
+        self.defensa = 5
         self.velocidad = 10
         self.experiencia = 0
         self.nivel = 1
         self.inventario = []
         self.estado = 'Normal'
 
+
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
         print(f'Nombre: {self.nombre} - {self.tipo}')
         print(f'Vida: {self.vida} / {self.vidamax}')
         print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
-        print(f'Fuerza: {self.fuerza} | Velocidad: {self.velocidad}')
+        print(f'Fuerza: {self.fuerza} | Defensa: {self.defensa} | Velocidad: {self.velocidad}')
         print(f'Inventario: {self.inventario}')
 
     def recibir_dano(self, cantidad:int):
@@ -43,7 +45,14 @@ class Personaje:
         self.vidamax = 100
         self.vida = self.vidamax
         self.fuerza += 5
+        self.defensa += 2
         self.velocidad += 2
         print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??') 
 
+    def con_vida(self):
+        return self.vida > 0
 
+    def atacar(self, enemigo):
+        dano = max(0, self.fuerza - enemigo.defensa)
+        print(f'{self.nombre} ataca a {enemigo.nombre}. Causa {dano} de daño.')
+        enemigo.recibir_dano(dano)
