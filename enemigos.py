@@ -19,15 +19,17 @@ class Enemigo:
 
     def recibir_dano(self, cantidad):
         dano_real = max(0, cantidad - self.defensa)
-        self.vida = dano_real
+        self.vida -= dano_real
         print(f'{self.nombre} recibió {dano_real} de daño. | Vida restante: {self.vida}')
         if self.vida <= 0:
             print(f'{self.nombre} ha sido eliminado.')
 
-    def atacar(self):
+    def atacar(self, jugador):
         dano = random.randint(int(self.ataque*0.8), int(self.ataque*1.2))
-        print(f'{self.nombre} ataca a (Personaje) | Daño impactado: {dano}')
-#        Personaje.recibir_dano()
+        print(f'{self.nombre} ataca a (Personaje) | Daño: {dano}')
+        jugador.recibir_dano()
 
-    def use_habilidad(self):
-        pass
+    def usar_habilidad(self, jugador):
+        if self.habilidad:
+            print(f'{self.nombre} usa su habilidad especial: {self.habilidad}!')
+            jugador.recibir_dano(self.ataque + 5)
