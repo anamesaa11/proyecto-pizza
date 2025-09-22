@@ -23,32 +23,61 @@ from Personajes import Personaje
 #     main()
 
 
-Plebeyo = Personaje('Pizzerito', 'Plebeyo')
-Plebeyo.mostrar_estado()
-Plebeyo.recibir_dano(30)
-Plebeyo.curar(20)
-Plebeyo.ganar_experiencia(110)
-from mazmorras import mostrar_mapa, mover_jugador
+#Plebeyo = Personaje('Pizzerito', 'Plebeyo')
+#lebeyo.mostrar_estado()
+#Plebeyo.recibir_dano(30)
+#Plebeyo.curar(20)
+#Plebeyo.ganar_experiencia(110)
+#from mazmorras import mostrar_mapa, mover_jugador
 
-def main():
+#def main():
     #mapa5x5
-    mapa = [
-        [".", ".", ".", ".", "."],
-        [".", ".", ".", ".", "."],
-        [".", ".", "X", ".", "."],
-        [".", ".", ".", ".", "."],
-        [".", ".", ".", ".", "."],
-    ]
+ #   mapa = [
+   #     [".", ".", ".", ".", "."],
+    #    [".", ".", ".", ".", "."],
+    #    [".", ".", "X", ".", "."],
+     #   [".", ".", ".", ".", "."],
+      #  [".", ".", ".", ".", "."],
+  #  ]
 
-    jugador_pos = (0, 0)
+   # jugador_pos = (0, 0)
 
-    while True:
-        mostrar_mapa(mapa, jugador_pos)
-        mov = input("Mover (w/a/s/d, q para salir): ")
-        if mov == "q":
-            print("Saliste del juego.")
-            break
-        jugador_pos = mover_jugador(mov, jugador_pos, mapa)
+    #while True:
+     #   mostrar_mapa(mapa, jugador_pos)
+      #  mov = input("Mover (w/a/s/d, q para salir): ")
+       # if mov == "q":
+        #    print("Saliste del juego.")
+         #   break
+        #jugador_pos = mover_jugador(mov, jugador_pos, mapa)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__"
+ #   main()
+
+from Personajes import Personaje
+from items import pocion_vida, espada, escudo, botas, elixir
+from utilidades import mostrar_inventario, usar_item_inventario
+
+# Crear un personaje de prueba
+jugador = Personaje("Pizzerito", "Plebeyo")
+
+# Agregar ítems al inventario
+jugador.inventario.append(pocion_vida)
+jugador.inventario.append(espada)
+jugador.inventario.append(elixir)
+
+# Mostrar estado inicial
+jugador.mostrar_estado()
+
+# Mostrar inventario
+mostrar_inventario(jugador)
+
+# Usar el primer ítem (la poción de vida)
+print("\n--- Usando poción ---")
+usar_item_inventario(jugador, 0)
+
+# Usar el segundo ítem (la espada)
+print("\n--- Usando espada ---")
+usar_item_inventario(jugador, 0)
+
+# Mostrar estado final
+jugador.mostrar_estado()
