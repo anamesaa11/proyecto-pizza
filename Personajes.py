@@ -12,7 +12,6 @@ class Personaje:
         self.inventario = []
         self.estado = 'Normal'
 
-
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
         print(f'Nombre: {self.nombre} - {self.tipo}')
