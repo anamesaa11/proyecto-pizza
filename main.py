@@ -1,83 +1,68 @@
 from Personajes import Personaje
-
-# def main():
-#     #crear personajes
-#     heroe = Personaje("Héroe")
-#     enemigo = Personaje("Enemigo")
-#
-#     #mmstrar estado inicial
-#     print(f"\n--- COMIENZA LA BATALLA ---")
-#     print(f"{heroe.nombre}: Vida {heroe.vida}, Nivel {heroe.nivel}")
-#     print(f"{enemigo.nombre}: Vida {enemigo.vida}, Nivel {enemigo.nivel}\n")
-#
-#     #simular acciones
-#     enemigo.recibir_dano(30)   #el héroe ataca
-#     heroe.ganar_experiencia(50)
-#
-#     heroe.recibir_dano(20)     #el enemigo ataca
-#     heroe.curar(15)
-#
-#     heroe.ganar_experiencia(60)  #experiencia acumulada --sube de nivel
-
-# if __name__ == "__main__": git
-#     main()
+from enemigos import Enemigo
+from items import lista_items
+from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
+from mazmorras import generar_mapa, mostrar_mapa, mover_jugador
+from combate import iniciar_combate
 
 
-#Plebeyo = Personaje('Pizzerito', 'Plebeyo')
-#lebeyo.mostrar_estado()
-#Plebeyo.recibir_dano(30)
-#Plebeyo.curar(20)
-#Plebeyo.ganar_experiencia(110)
-#from mazmorras import mostrar_mapa, mover_jugador
+def prueba_personaje():
+    print('\nPRUEBA DE PERSONAJE')
+    heroe = Personaje('Pizzerito', 'Plebeyo')
+    heroe.inventario.extend(lista_items[:3])
+    heroe.mostrar_estado()
+    mostrar_inventario(heroe)
 
-#def main():
-    #mapa5x5
- #   mapa = [
-   #     [".", ".", ".", ".", "."],
-    #    [".", ".", ".", ".", "."],
-    #    [".", ".", "X", ".", "."],
-     #   [".", ".", ".", ".", "."],
-      #  [".", ".", ".", ".", "."],
-  #  ]
+    print('\nUsando 1er ítem del Inventario...')
+    usar_item_inventario(heroe, 0)
+    heroe.mostrar_estado()
 
-   # jugador_pos = (0, 0)
 
-    #while True:
-     #   mostrar_mapa(mapa, jugador_pos)
-      #  mov = input("Mover (w/a/s/d, q para salir): ")
-       # if mov == "q":
-        #    print("Saliste del juego.")
-         #   break
-        #jugador_pos = mover_jugador(mov, jugador_pos, mapa)
+def prueba_mapa():
+    limpiar_pantalla()
+    print('\nPRUEBA MAZMORRA')
+    mapa = generar_mapa(5, 10)
+    jugador_pos = (0, 0)
 
-#if __name__ == "__main__"
- #   main()
+    while True:
+        mostrar_mapa(mapa, jugador_pos)
+        mov = input('Mover (w/a/s/d, q para salir): ')
+        if mov == 'q':
+            print('Saliendo de la mazmorra...')
+            break
+        jugador_pos = mover_jugador(mov, jugador_pos, mapa)
 
-from Personajes import Personaje
-from items import pocion_vida, espada, escudo, botas, elixir
-from utilidades import mostrar_inventario, usar_item_inventario
 
-# Crear un personaje de prueba
-jugador = Personaje("Pizzerito", "Plebeyo")
+def prueba_combate():
+    limpiar_pantalla()
+    print('\nPRUEBA COMBATE')
+    jugador = Personaje('Pizzerito', 'Plebeyo')
+    enemigo = Enemigo('Hambriento', nivel=1, vida=15, ataque=5,defensa=3, velocidad=2,
+                      experiencia=50, comportamiento= 'amenazante', habilidad='Palito de Orégano')
+    iniciar_combate(jugador, enemigo)
 
-# Agregar ítems al inventario
-jugador.inventario.append(pocion_vida)
-jugador.inventario.append(espada)
-jugador.inventario.append(elixir)
 
-# Mostrar estado inicial
-jugador.mostrar_estado()
+def main():
+    while True:
+        print('\nMENÚ DE PRUEBAS')
+        print('1. Probar Personajes e Inventario(Caracterísitcas).')
+        print('2. Probar Mapa y Movimiento.')
+        print('3. Probar Combate.')
+        print('4. Salir.')
 
-# Mostrar inventario
-mostrar_inventario(jugador)
+        opcion = input('Ingrese opción: ')
 
-# Usar el primer ítem (la poción de vida)
-print("\n--- Usando poción ---")
-usar_item_inventario(jugador, 0)
+        if opcion == '1':
+            prueba_personaje()
+        elif opcion == '2':
+            prueba_mapa()
+        elif opcion == '3':
+            prueba_combate()
+        elif opcion == '4':
+            print('Saliendo...')
+            break
+        else:
+            print('Opción no válida.')
 
-# Usar el segundo ítem (la espada)
-print("\n--- Usando espada ---")
-usar_item_inventario(jugador, 0)
-
-# Mostrar estado final
-jugador.mostrar_estado()
+if __name__ == "__main__":
+    main()
