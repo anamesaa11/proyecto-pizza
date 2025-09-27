@@ -27,7 +27,7 @@ class Enemigo:
     def atacar(self, jugador):
         dano = random.randint(int(self.ataque*0.8), int(self.ataque*1.2))
         print(f'{self.nombre} ataca a (Personaje) | Daño: {dano}')
-        jugador.recibir_dano()
+        jugador.recibir_dano(10) #Establecer cantidad, establecer tipos de Enemigos
 
     def usar_habilidad(self, jugador):
         if self.habilidad:

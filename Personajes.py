@@ -12,7 +12,6 @@ class Personaje:
         self.inventario = []
         self.estado = 'Normal'
 
-
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
         print(f'Nombre: {self.nombre} - {self.tipo}')
@@ -47,7 +46,7 @@ class Personaje:
         self.fuerza += 5
         self.defensa += 2
         self.velocidad += 2
-        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??') 
+        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??')
 
     def con_vida(self):
         return self.vida > 0
