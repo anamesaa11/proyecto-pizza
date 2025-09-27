@@ -46,7 +46,7 @@ class Personaje:
         self.fuerza += 5
         self.defensa += 2
         self.velocidad += 2
-        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??') 
+        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??')
 
     def con_vida(self):
         return self.vida > 0
