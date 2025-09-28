@@ -1,12 +1,12 @@
 class Personaje:
-    def __init__(self, nombre, tipo):
+    def __init__(self, nombre, tipo, vida, fuerza, defensa, velocidad):
         self.nombre = nombre
         self.tipo = tipo
-        self.vida = 100
-        self.vidamax = 100
-        self.fuerza = 10
-        self.defensa = 5
-        self.velocidad = 10
+        self.vida = vida
+        self.vidamax = vida
+        self.fuerza = fuerza
+        self.defensa = defensa
+        self.velocidad = velocidad
         self.experiencia = 0
         self.nivel = 1
         self.inventario = []
@@ -18,7 +18,7 @@ class Personaje:
         print(f'Vida: {self.vida} / {self.vidamax}')
         print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
         print(f'Fuerza: {self.fuerza} | Defensa: {self.defensa} | Velocidad: {self.velocidad}')
-        print(f'Inventario: {self.inventario}')
+        print(f'Inventario: {len(self.inventario)} ítems')
 
     def recibir_dano(self, cantidad:int):
         self.vida -= cantidad
@@ -41,12 +41,12 @@ class Personaje:
     def subir_nivel(self):
         self.nivel += 1
         self.experiencia = 0
-        self.vidamax = 100
+        self.vidamax += 50
         self.vida = self.vidamax
         self.fuerza += 5
         self.defensa += 2
         self.velocidad += 2
-        print(f'{self.nombre} sube a nivel {self.nivel}! Agregar atributos??')
+        print(f'{self.nombre} sube a nivel {self.nivel}! Atributos Mejorados.')
 
     def con_vida(self):
         return self.vida > 0
@@ -55,3 +55,15 @@ class Personaje:
         dano = max(0, self.fuerza - enemigo.defensa)
         print(f'{self.nombre} ataca a {enemigo.nombre}. Causa {dano} de daño.')
         enemigo.recibir_dano(dano)
+
+
+def crear_personaje_mazmorra(maz):
+    if maz == 1:
+        return Personaje('nombre', 'Plebeyo', vida=80, fuerza=8, defensa=10, velocidad=10)
+    elif maz == 2:
+        return Personaje('nombre', 'Bárbaro', vida=120, fuerza=20, defensa=6, velocidad=5)
+    elif maz == 3:
+        return Personaje('nombre', 'Hechicero', vida=150, fuerza=10, defensa=20, velocidad=15)
+    else:
+        raise ValueError('Número de mazmorra inválido')
+
