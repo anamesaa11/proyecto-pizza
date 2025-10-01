@@ -1,7 +1,7 @@
 class Item:
     def __init__(self, nombre, tipo, efecto, valor):
         self.nombre = nombre
-        self.tipo = tipo  # consumible o equipable
+        self.tipo = tipo
         self.efecto = efecto
         self.valor = valor
 
@@ -20,7 +20,11 @@ class Item:
         else:
             print("Este ítem no tiene efecto.")
 
-# Ítems concretos
+    def __str__(self):
+        return f"{self.nombre} ({self.tipo}, {self.efecto} +{self.valor})"
+
+
+
 pocion_vida = Item("Poción de Vida", "consumible", "vida", 30)
 espada = Item("Espátula de Hierro", "equipable", "fuerza", 5)
 escudo = Item("Caja de Cartón", "equipable", "defensa", 3)

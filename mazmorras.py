@@ -1,15 +1,43 @@
 import random
 
+ESCENARIOS = {
+    1: {
+        "nombre": "Mazmorra 1 – Pueblo/ciudad 🏘️",
+        "descripcion": "Callejones llenos de ladrones y clientes exigentes.",
+        "suelo": "🛣️",
+        "relleno": "🏘️"
+    },
+    2: {
+        "nombre": "Mazmorra 2 – Bosque Encantado 🌲",
+        "descripcion": "Duendes y animales mágicos intentan quedarse con tu pizza.",
+        "suelo": "🛣️",
+        "relleno": "🌲"
+    },
+    3: {
+        "nombre": "Mazmorra 3 – Cielos de Pepperoni ☁️",
+        "descripcion": "Debes volar en un globo o montura para entregar pizzas en islas flotantes, evitando águilas.",
+        "suelo": "🛣️",
+        "relleno": "☁️"
+    },
+    4: {
+        "nombre": "Mazmorra 4 – Castillo del Jefe Final 🏰🔥",
+        "descripcion": "El Dragón Guardián de la Pizza Suprema espera… con hambre.",
+        "suelo": "🛣️",
+        "relleno": "🔥"
+    }
+}
+
+
 def mostrar_mapa(mapa, jugador_pos):
     """
     Muestra el mapa en consola con el jugador en su posición actual.
-    @ representa al jugador
+    🍕 representa al jugador
     """
     for i, fila in enumerate(mapa):
         fila_str = ""
         for j, casilla in enumerate(fila):
             if (i, j) == jugador_pos:
-                fila_str += "@ "
+                fila_str += "🍕 "
             else:
                 fila_str += casilla + " "
         print(fila_str)
@@ -37,30 +65,36 @@ def mover_jugador(direccion, jugador_pos, mapa):
 
     return (x, y)
 
-def generar_mapa(filas=5, columnas=20):
 
-    mapa = [["🌳" for _ in range(columnas)] for _ in range(filas)]
+def generar_mapa(filas=5, columnas=20, escenario=ESCENARIOS[2]):
+    """
+    Genera un mapa aleatorio con un camino dentro del escenario elegido.
+    """
+
+    mapa = [[escenario["relleno"] for _ in range(columnas)] for _ in range(filas)]
 
     fila = random.randint(0, filas - 1)
     col = 0
+    inicio_camino = (fila, col)
 
     while col < columnas:
-        mapa[fila][col] = "🛣️"
+        mapa[fila][col] = escenario["suelo"]
         movimiento = random.choice(["derecha", "arriba", "abajo"])
 
         if movimiento == "derecha" and col < columnas - 1:
             col += 1
         elif movimiento == "arriba" and fila > 0 and col < columnas - 2:
             fila -= 1
-            mapa[fila][col] = "🛣️"
+            mapa[fila][col] = escenario["suelo"]
             col += 1
-            mapa[fila][col] = "🛣️"
+            mapa[fila][col] = escenario["suelo"]
         elif movimiento == "abajo" and fila < filas - 1 and col < columnas - 2:
             fila += 1
-            mapa[fila][col] = "🛣️"
+            mapa[fila][col] = escenario["suelo"]
             col += 1
-            mapa[fila][col] = "🛣️"
+            mapa[fila][col] = escenario["suelo"]
         else:
             col += 1
 
-    return mapa
+    return mapa, inicio_camino
+
