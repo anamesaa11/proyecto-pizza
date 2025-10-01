@@ -1,57 +1,26 @@
-import random
-from personajes import crear_personaje, mostrar_estado
-from enemigos import generar_enemigo
-from items import generar_item, usar_item
-from utilidades import combate
-from mazmorras import ESCENARIOS, generar_mapa, mostrar_mapa, mover_jugador
+from mazmorras import generar_mapa, mostrar_mapa, mover_jugador, ESCENARIOS
 
 def main():
-    print("=== REPARTIDOR DE PIZZA MEDIEVAL ===")
+    print("=== ELIGE TU MAZMORRA ===")
+    for num, esc in ESCENARIOS.items():
+        print(f"{num}. {esc['nombre']} -> {esc['descripcion']}")
 
-    # Crear personaje principal
-    jugador = crear_personaje("Pizzerito")
-    print("¡Bienvenido, valiente repartidor!\n")
-    mostrar_estado(jugador)
+    eleccion = int(input("Número de mazmorra: "))
+    escenario = ESCENARIOS.get(eleccion, ESCENARIOS[2])  # default Bosque
 
-    # Elegir mazmorra
-    print("\nElige tu mazmorra:")
-    for k, v in ESCENARIOS.items():
-        print(f"{k}. {v['nombre']} - {v['descripcion']}")
-    eleccion = int(input("Número: "))
-    escenario = ESCENARIOS.get(eleccion, ESCENARIOS[1])
+    mapa, jugador_pos = generar_mapa(escenario=escenario)
 
-    # Generar mapa
-    mapa, jugador_pos = generar_mapa(5, 20, escenario)
-    print(f"\nEntraste en: {escenario['nombre']}")
+    print(f"\nEntraste a: {escenario['nombre']}")
+    mostrar_mapa(mapa, jugador_pos)
 
-    # Bucle de juego
     while True:
-        mostrar_mapa(mapa, jugador_pos)
-        accion = input("Movimiento (w/a/s/d, q salir): ").lower()
-
+        accion = input("Mover (w/a/s/d) o q para salir: ").lower()
         if accion == "q":
-            print("¡Fin de la aventura!")
+            print("¡Hasta la próxima entrega de pizza! 🍕")
             break
-
-        jugador_pos = mover_jugador(accion, jugador_pos, mapa)
-
-        # Eventos aleatorios
-        evento = random.choice(["nada", "enemigo", "item"])
-        if evento == "enemigo":
-            enemigo = generar_enemigo()
-            print(f"\n¡Un {enemigo['nombre']} aparece! 🍄")
-            combate(jugador, enemigo)
-        elif evento == "item":
-            item = generar_item()
-            print(f"\n¡Encontraste un {item['nombre']}! 🎁")
-            usar = input("¿Quieres usarlo? (s/n): ").lower()
-            if usar == "s":
-                usar_item(jugador, item)
-
-        # Revisar si jugador está vivo
-        if jugador["vida"] <= 0:
-            print("\n☠️ Has caído en la aventura. ¡Game Over!")
-            break
+        else:
+            jugador_pos = mover_jugador(accion, jugador_pos, mapa)
+            mostrar_mapa(mapa, jugador_pos)
 
 if __name__ == "__main__":
     main()

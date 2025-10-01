@@ -1,8 +1,5 @@
 import random
 
-# ==========================
-# Escenarios disponibles
-# ==========================
 ESCENARIOS = {
     1: {
         "nombre": "Mazmorra 1 – Pueblo/ciudad 🏘️",
@@ -26,13 +23,11 @@ ESCENARIOS = {
         "nombre": "Mazmorra 4 – Castillo del Jefe Final 🏰🔥",
         "descripcion": "El Dragón Guardián de la Pizza Suprema espera… con hambre.",
         "suelo": "🛣️",
-        "relleno": "🏰"
+        "relleno": "🔥"
     }
 }
 
-# ==========================
-# Mostrar mapa
-# ==========================
+
 def mostrar_mapa(mapa, jugador_pos):
     """
     Muestra el mapa en consola con el jugador en su posición actual.
@@ -48,9 +43,6 @@ def mostrar_mapa(mapa, jugador_pos):
         print(fila_str)
     print()
 
-# ==========================
-# Mover jugador
-# ==========================
 def mover_jugador(direccion, jugador_pos, mapa):
     """
     Mueve al jugador según la tecla ingresada:
@@ -73,14 +65,12 @@ def mover_jugador(direccion, jugador_pos, mapa):
 
     return (x, y)
 
-# ==========================
-# Generar mapa según escenario
-# ==========================
+
 def generar_mapa(filas=5, columnas=20, escenario=ESCENARIOS[2]):
     """
     Genera un mapa aleatorio con un camino dentro del escenario elegido.
     """
-    # Llenar con el emoji de "relleno" (bosque, ciudad, nubes, castillo...)
+
     mapa = [[escenario["relleno"] for _ in range(columnas)] for _ in range(filas)]
 
     fila = random.randint(0, filas - 1)
