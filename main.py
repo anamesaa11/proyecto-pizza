@@ -1,68 +1,57 @@
-from Personajes import Personaje
-from enemigos import Enemigo
-from items import lista_items
-from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
-from mazmorras import generar_mapa, mostrar_mapa, mover_jugador
-from combate import iniciar_combate
-
-
-def prueba_personaje():
-    print('\nPRUEBA DE PERSONAJE')
-    heroe = Personaje('Pizzerito', 'Plebeyo')
-    heroe.inventario.extend(lista_items[:3])
-    heroe.mostrar_estado()
-    mostrar_inventario(heroe)
-
-    print('\nUsando 1er ítem del Inventario...')
-    usar_item_inventario(heroe, 0)
-    heroe.mostrar_estado()
-
-
-def prueba_mapa():
-    limpiar_pantalla()
-    print('\nPRUEBA MAZMORRA')
-    mapa = generar_mapa(5, 10)
-    jugador_pos = (0, 0)
-
-    while True:
-        mostrar_mapa(mapa, jugador_pos)
-        mov = input('Mover (w/a/s/d, q para salir): ')
-        if mov == 'q':
-            print('Saliendo de la mazmorra...')
-            break
-        jugador_pos = mover_jugador(mov, jugador_pos, mapa)
-
-
-def prueba_combate():
-    limpiar_pantalla()
-    print('\nPRUEBA COMBATE')
-    jugador = Personaje('Pizzerito', 'Plebeyo')
-    enemigo = Enemigo('Hambriento', nivel=1, vida=15, ataque=5,defensa=3, velocidad=2,
-                      experiencia=50, comportamiento= 'amenazante', habilidad='Palito de Orégano')
-    iniciar_combate(jugador, enemigo)
-
+import random
+from personajes import crear_personaje, mostrar_estado
+from enemigos import generar_enemigo
+from items import generar_item, usar_item
+from utilidades import combate
+from mazmorras import ESCENARIOS, generar_mapa, mostrar_mapa, mover_jugador
 
 def main():
+    print("=== REPARTIDOR DE PIZZA MEDIEVAL ===")
+
+    # Crear personaje principal
+    jugador = crear_personaje("Pizzerito")
+    print("¡Bienvenido, valiente repartidor!\n")
+    mostrar_estado(jugador)
+
+    # Elegir mazmorra
+    print("\nElige tu mazmorra:")
+    for k, v in ESCENARIOS.items():
+        print(f"{k}. {v['nombre']} - {v['descripcion']}")
+    eleccion = int(input("Número: "))
+    escenario = ESCENARIOS.get(eleccion, ESCENARIOS[1])
+
+    # Generar mapa
+    mapa, jugador_pos = generar_mapa(5, 20, escenario)
+    print(f"\nEntraste en: {escenario['nombre']}")
+
+    # Bucle de juego
     while True:
-        print('\nMENÚ DE PRUEBAS')
-        print('1. Probar Personajes e Inventario(Caracterísitcas).')
-        print('2. Probar Mapa y Movimiento.')
-        print('3. Probar Combate.')
-        print('4. Salir.')
+        mostrar_mapa(mapa, jugador_pos)
+        accion = input("Movimiento (w/a/s/d, q salir): ").lower()
 
-        opcion = input('Ingrese opción: ')
-
-        if opcion == '1':
-            prueba_personaje()
-        elif opcion == '2':
-            prueba_mapa()
-        elif opcion == '3':
-            prueba_combate()
-        elif opcion == '4':
-            print('Saliendo...')
+        if accion == "q":
+            print("¡Fin de la aventura!")
             break
-        else:
-            print('Opción no válida.')
+
+        jugador_pos = mover_jugador(accion, jugador_pos, mapa)
+
+        # Eventos aleatorios
+        evento = random.choice(["nada", "enemigo", "item"])
+        if evento == "enemigo":
+            enemigo = generar_enemigo()
+            print(f"\n¡Un {enemigo['nombre']} aparece! 🍄")
+            combate(jugador, enemigo)
+        elif evento == "item":
+            item = generar_item()
+            print(f"\n¡Encontraste un {item['nombre']}! 🎁")
+            usar = input("¿Quieres usarlo? (s/n): ").lower()
+            if usar == "s":
+                usar_item(jugador, item)
+
+        # Revisar si jugador está vivo
+        if jugador["vida"] <= 0:
+            print("\n☠️ Has caído en la aventura. ¡Game Over!")
+            break
 
 if __name__ == "__main__":
     main()

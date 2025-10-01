@@ -11,6 +11,7 @@ class Personaje:
         self.nivel = 1
         self.inventario = []
         self.estado = 'Normal'
+        self.defendiendo = False
 
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
