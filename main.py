@@ -1,4 +1,4 @@
-from Personajes import Personaje, crear_personaje_mazmorra
+from personajes import Personaje, crear_personaje_mazmorra
 from enemigos import Enemigo, crear_enemigo
 from items import lista_items
 from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
