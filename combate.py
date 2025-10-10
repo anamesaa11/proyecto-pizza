@@ -54,7 +54,7 @@ def intentar_huir():
 
 
 def iniciar_combate (jugador, enemigo):
-    print(f'COMBATE! {enemigo.nombre}')
+    print(f'COMBATE! {enemigo}')
     turno = 1
     vida_pizza = 100
 
