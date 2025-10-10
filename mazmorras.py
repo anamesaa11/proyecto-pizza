@@ -29,36 +29,31 @@ ESCENARIOS = {
 
 
 def mostrar_mapa(mapa, jugador_pos):
-    """
-    Muestra el mapa en consola con el jugador en su posición actual.
-    🍕 representa al jugador
-    """
+
     for i, fila in enumerate(mapa):
         fila_str = ""
         for j, casilla in enumerate(fila):
             if (i, j) == jugador_pos:
                 fila_str += "🍕 "
             else:
-                fila_str += casilla + " "
+                fila_str += str(casilla) + " "  # 🔧 corrección del TypeError
         print(fila_str)
     print()
 
+
 def mover_jugador(direccion, jugador_pos, mapa):
-    """
-    Mueve al jugador según la tecla ingresada:
-    w = arriba, s = abajo, a = izquierda, d = derecha
-    """
+
     x, y = jugador_pos
     filas = len(mapa)
     columnas = len(mapa[0])
 
-    if direccion == "w" and x > 0:  # arriba
+    if direccion == "w" and x > 0:
         x -= 1
-    elif direccion == "s" and x < filas - 1:  # abajo
+    elif direccion == "s" and x < filas - 1:
         x += 1
-    elif direccion == "a" and y > 0:  # izquierda
+    elif direccion == "a" and y > 0:
         y -= 1
-    elif direccion == "d" and y < columnas - 1:  # derecha
+    elif direccion == "d" and y < columnas - 1:
         y += 1
     else:
         print("Movimiento inválido.")
@@ -67,9 +62,6 @@ def mover_jugador(direccion, jugador_pos, mapa):
 
 
 def generar_mapa(filas=5, columnas=20, escenario=ESCENARIOS[2]):
-    """
-    Genera un mapa aleatorio con un camino dentro del escenario elegido.
-    """
 
     mapa = [[escenario["relleno"] for _ in range(columnas)] for _ in range(filas)]
 
@@ -98,3 +90,26 @@ def generar_mapa(filas=5, columnas=20, escenario=ESCENARIOS[2]):
 
     return mapa, inicio_camino
 
+
+class Enemigo:
+    def __init__(self, nombre, vida, posicion):
+        self.nombre = nombre
+        self.vida = vida
+        self.posicion = posicion
+
+
+def crear_enemigos(cantidad, filas, columnas):
+
+    enemigos = []
+    for i in range(cantidad):
+        x = random.randint(0, filas - 1)
+        y = random.randint(0, columnas - 1)
+        enemigos.append(Enemigo(f"Enemigo{i+1}", 50, (x, y)))
+    return enemigos
+
+
+def colocar_enemigos_en_mapa(mapa, enemigos):
+    for enemigo in enemigos:
+        x, y = enemigo.posicion
+        mapa[x][y] = "👹"
+    return mapa

@@ -32,3 +32,16 @@ botas = Item("Zapatillas de Reparto", "equipable", "velocidad", 2)
 elixir = Item("Elixir de Queso Fundido", "consumible", "vida", 50)
 
 lista_items = [pocion_vida, espada, escudo, botas, elixir]
+import random
+
+def generar_item():
+    """Devuelve un ítem aleatorio de la lista."""
+    item = random.choice(lista_items)
+    print(f"Has encontrado un {item.nombre} 🎁")
+    return item
+
+
+def usar_item(jugador, item):
+    """Usa el ítem sobre el jugador."""
+    print(f"Usando {item.nombre}...")
+    item.usar(jugador)

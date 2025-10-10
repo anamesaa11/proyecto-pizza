@@ -35,3 +35,4 @@ def mostrar_texto_lento(texto, velocidad=0.03):
         sys.stdout.flush()
         time.sleep(velocidad)
     print()
+
