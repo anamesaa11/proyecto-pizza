@@ -113,3 +113,4 @@ def colocar_enemigos_en_mapa(mapa, enemigos):
         x, y = enemigo.posicion
         mapa[x][y] = "👹"
     return mapa
+
