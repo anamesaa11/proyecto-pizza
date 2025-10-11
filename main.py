@@ -2,7 +2,7 @@ from personajes import Personaje, crear_personaje_mazmorra
 from enemigos import Enemigo, crear_enemigo
 from items import lista_items
 from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
-from mazmorras import generar_mapa, mostrar_mapa, mover_jugador
+from mazmorras import generar_mapa, mostrar_mapa, mover_jugador, ESCENARIOS
 from combate import iniciar_combate
 
 progreso = 1
@@ -22,8 +22,8 @@ progreso = 1
 def prueba_mapa():
     limpiar_pantalla()
     print('\nPRUEBA MAZMORRA')
-    mapa = generar_mapa(5, 10)
-    jugador_pos = (0, 0)
+    mapa, inicio = generar_mapa(5, 10, ESCENARIOS[1])
+    jugador_pos = inicio
 
     while True:
         mostrar_mapa(mapa, jugador_pos)
@@ -72,8 +72,12 @@ def jugar_mazmorra(maz):
 
     jugador = crear_personaje_mazmorra(maz)
     jugador.mostrar_estado()
-    mapa = generar_mapa()
-    mostrar_mapa(mapa, (0, 0))
+    escenario = ESCENARIOS.get(maz, ESCENARIOS[1])
+    mapa, inicio = generar_mapa(5, 20, escenario=escenario)
+    jugador_pos = inicio
+
+    mostrar_mapa(mapa, jugador_pos)
+
     enemigo = crear_enemigo(maz)
     iniciar_combate(jugador, enemigo)
 
