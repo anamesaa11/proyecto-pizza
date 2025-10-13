@@ -1,6 +1,5 @@
 from personajes import Personaje, crear_personaje_mazmorra
 from enemigos import Enemigo, obtener_enemigos
-from items import lista_items
 from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
 from mazmorras import generar_mapa, mostrar_mapa, mover_jugador, ESCENARIOS
 from combate import iniciar_combate
