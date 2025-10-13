@@ -1,5 +1,4 @@
 import random
-#from Personajes import Personaje
 
 
 class Enemigo:
@@ -26,7 +25,7 @@ class Enemigo:
 
     def atacar(self, jugador):
         dano = random.randint(int(self.ataque*0.8), int(self.ataque*1.2))
-        print(f'{self.nombre} ataca a {jugador.nombre} | Daño: {dano}')
+        print(f'⚔️{self.nombre} ataca a {jugador.nombre} | Daño: {dano}')
         jugador.recibir_dano(dano)
 
     def usar_habilidad(self, jugador):
@@ -35,26 +34,26 @@ class Enemigo:
             jugador.recibir_dano(self.ataque + 5)
 
 
-def crear_enemigo(maz):
+def obtener_enemigos(maz):
     if maz == 1:
         return [
-            Enemigo(nombre='Ladrón', nivel=1, vida=25, ataque=7, defensa=3, velocidad=10,
-                       experiencia=15, comportamiento= 'Escurridizo', habilidad='Cuchilla rápida'),
-            Enemigo(nombre='Hambriento', nivel=1, vida=40, ataque=10, defensa=5, velocidad=6,
+            Enemigo(nombre='Ladrón 🗡️', nivel=1, vida=25, ataque=7, defensa=3, velocidad=10,
+                    experiencia=15, comportamiento='Escurridizo', habilidad='Cuchilla rápida'),
+            Enemigo(nombre='Hambriento 🍗', nivel=1, vida=40, ataque=10, defensa=5, velocidad=6,
                     experiencia=20, comportamiento='Desesperado', habilidad='Golpe con Huesos')
             ]
     elif maz == 2:
         return [
-            Enemigo(nombre='Duende', nivel=2, vida=50, ataque=12, defensa=7, velocidad=15,
-                       experiencia=40, comportamiento='Tramposo', habilidad='Lluvia de Monedas'),
-            Enemigo(nombre='Ogro', nivel=2, vida=70, ataque=15, defensa=10, velocidad=4,
+            Enemigo(nombre='Duende 💰', nivel=2, vida=50, ataque=12, defensa=7, velocidad=15,
+                    experiencia=40, comportamiento='Tramposo', habilidad='Lluvia de Monedas'),
+            Enemigo(nombre='Ogro 💪', nivel=2, vida=70, ataque=15, defensa=10, velocidad=4,
                     experiencia=50, comportamiento='Tramposo', habilidad='Pisotón')
             ]
     elif maz == 3:
-        return [Enemigo(nombre='Águila Gigante', nivel=3, vida=60, ataque=18, defensa=8, velocidad=25,
-                       experiencia=70, comportamiento= 'Veloz', habilidad='Picoteo'),
-                Enemigo(nombre='Dragón', nivel=3, vida=150, ataque=30, defensa=20, velocidad=25,
+        return [Enemigo(nombre='Águila Gigante 🦅', nivel=3, vida=60, ataque=18, defensa=8, velocidad=25,
+                        experiencia=70, comportamiento='Veloz', habilidad='Picoteo'),
+                Enemigo(nombre='Dragón 🔥', nivel=3, vida=150, ataque=30, defensa=20, velocidad=25,
                         experiencia=200, comportamiento='Final', habilidad='Fuego')
-            ]
+                ]
     else:
         raise ValueError('Número de mazmorra inválido')
