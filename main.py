@@ -1,22 +1,11 @@
 from personajes import Personaje, crear_personaje_mazmorra
-from enemigos import Enemigo, crear_enemigo
+from enemigos import Enemigo, obtener_enemigos
 from items import lista_items
 from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
 from mazmorras import generar_mapa, mostrar_mapa, mover_jugador, ESCENARIOS
 from combate import iniciar_combate
 
 progreso = 1
-
-# def prueba_personaje():
-#     print('\nPRUEBA DE PERSONAJE')
-#     heroe = Personaje('Pizzerito', 'Plebeyo')
-#     heroe.inventario.extend(lista_items[:3])
-#     heroe.mostrar_estado()
-#     mostrar_inventario(heroe)
-#
-#     print('\nUsando 1er ítem del Inventario...')
-#     usar_item_inventario(heroe, 0)
-#     heroe.mostrar_estado()
 
 
 def prueba_mapa():
@@ -32,14 +21,6 @@ def prueba_mapa():
             print('Saliendo de la mazmorra...')
             break
         jugador_pos = mover_jugador(mov, jugador_pos, mapa)
-
-
-#def prueba_combate():
-#    limpiar_pantalla()
-#    print('\nPRUEBA COMBATE')
-#    jugador = Personaje('Pizzerito', 'Plebeyo')
-#    enemigo =
-#    iniciar_combate(jugador, enemigo)
 
 
 def main():
@@ -78,7 +59,7 @@ def jugar_mazmorra(maz):
 
     mostrar_mapa(mapa, jugador_pos)
 
-    enemigo = crear_enemigo(maz)
+    enemigo = obtener_enemigos(maz)
     iniciar_combate(jugador, enemigo)
 
 
