@@ -47,7 +47,7 @@ class Personaje:
         self.fuerza += 5
         self.defensa += 2
         self.velocidad += 2
-        print(f'{self.nombre} sube a nivel {self.nivel}! Atributos Mejorados.')
+        print(f'{self.nombre} sube a nivel {self.nivel}!')
 
     def con_vida(self):
         return self.vida > 0
@@ -60,11 +60,11 @@ class Personaje:
 
 def crear_personaje_mazmorra(maz):
     if maz == 1:
-        return Personaje('nombre', 'Plebeyo', vida=80, fuerza=8, defensa=10, velocidad=10)
+        return Personaje('Greg', 'Plebeyo 👞', vida=80, fuerza=8, defensa=10, velocidad=10)
     elif maz == 2:
-        return Personaje('nombre', 'Bárbaro', vida=120, fuerza=20, defensa=6, velocidad=5)
+        return Personaje('Bruto', 'Bárbaro 🪓', vida=120, fuerza=20, defensa=6, velocidad=5)
     elif maz == 3:
-        return Personaje('nombre', 'Hechicero', vida=150, fuerza=10, defensa=20, velocidad=15)
+        return Personaje('Nox', 'Hechicero 🔮', vida=150, fuerza=10, defensa=20, velocidad=15)
     else:
         raise ValueError('Número de mazmorra inválido')
 
