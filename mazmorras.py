@@ -1,4 +1,5 @@
 import random
+from enemigos import obtener_enemigos, Enemigo  # 👈 agregá esta línea arriba del todo
 
 ESCENARIOS = {
     1: {
@@ -29,7 +30,6 @@ ESCENARIOS = {
 
 
 def generar_mapa(ancho, largo, escenario):
-
     mapa = [[escenario["suelo"] for _ in range(largo)] for _ in range(ancho)]
 
     # Agregar algunos elementos aleatorios (relleno)
@@ -42,7 +42,6 @@ def generar_mapa(ancho, largo, escenario):
 
 
 def mostrar_mapa(mapa, posicion_jugador):
-
     for i, fila in enumerate(mapa):
         for j, celda in enumerate(fila):
             if (i, j) == posicion_jugador:
@@ -53,7 +52,6 @@ def mostrar_mapa(mapa, posicion_jugador):
 
 
 def mover_jugador(direccion, posicion, mapa):
-
     x, y = posicion
     max_x, max_y = len(mapa), len(mapa[0])
 
@@ -69,4 +67,45 @@ def mover_jugador(direccion, posicion, mapa):
         print("🚫 No puedes moverte en esa dirección.")
 
     return (x, y)
+
+
+# 🔥 NUEVA FUNCIÓN: generar enemigos aleatoriamente en el mapa
+def generar_enemigos_en_mapa(maz, mapa):
+    filas = len(mapa)
+    columnas = len(mapa[0])
+    enemigos_disponibles = obtener_enemigos(maz)
+    cantidad = random.randint(5, 7)
+
+    enemigos_colocados = []
+    posiciones_ocupadas = set()
+
+    for _ in range(cantidad):
+        enemigo_base = random.choice(enemigos_disponibles)
+
+        # Buscar posición libre aleatoria
+        while True:
+            x = random.randint(0, filas - 1)
+            y = random.randint(0, columnas - 1)
+            if (x, y) not in posiciones_ocupadas:
+                posiciones_ocupadas.add((x, y))
+                break
+
+        # Clonar enemigo (para que no compartan atributos)
+        enemigo = Enemigo(
+            enemigo_base.nombre,
+            enemigo_base.nivel,
+            enemigo_base.vida,
+            enemigo_base.ataque,
+            enemigo_base.defensa,
+            enemigo_base.velocidad,
+            enemigo_base.experiencia,
+            enemigo_base.comportamiento,
+            enemigo_base.habilidad
+        )
+
+        enemigos_colocados.append((x, y, enemigo))
+        mapa[x][y] = "😈"  # marcador visual
+
+    return enemigos_colocados
+
 
