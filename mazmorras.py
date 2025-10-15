@@ -1,5 +1,5 @@
 import random
-from enemigos import obtener_enemigos, Enemigo  # 👈 agregá esta línea arriba del todo
+from enemigos import obtener_enemigos, Enemigo
 
 ESCENARIOS = {
     1: {
@@ -32,7 +32,6 @@ ESCENARIOS = {
 def generar_mapa(ancho, largo, escenario):
     mapa = [[escenario["suelo"] for _ in range(largo)] for _ in range(ancho)]
 
-    # Agregar algunos elementos aleatorios (relleno)
     for _ in range(random.randint(5, 15)):
         x, y = random.randint(0, ancho - 1), random.randint(0, largo - 1)
         mapa[x][y] = escenario["relleno"]
@@ -69,7 +68,6 @@ def mover_jugador(direccion, posicion, mapa):
     return (x, y)
 
 
-# 🔥 NUEVA FUNCIÓN: generar enemigos aleatoriamente en el mapa
 def generar_enemigos_en_mapa(maz, mapa):
     filas = len(mapa)
     columnas = len(mapa[0])
@@ -82,7 +80,6 @@ def generar_enemigos_en_mapa(maz, mapa):
     for _ in range(cantidad):
         enemigo_base = random.choice(enemigos_disponibles)
 
-        # Buscar posición libre aleatoria
         while True:
             x = random.randint(0, filas - 1)
             y = random.randint(0, columnas - 1)
@@ -90,7 +87,6 @@ def generar_enemigos_en_mapa(maz, mapa):
                 posiciones_ocupadas.add((x, y))
                 break
 
-        # Clonar enemigo (para que no compartan atributos)
         enemigo = Enemigo(
             enemigo_base.nombre,
             enemigo_base.nivel,
@@ -104,8 +100,7 @@ def generar_enemigos_en_mapa(maz, mapa):
         )
 
         enemigos_colocados.append((x, y, enemigo))
-        mapa[x][y] = "😈"  # marcador visual
-
+        mapa[x][y] = "😈"
     return enemigos_colocados
 
 
