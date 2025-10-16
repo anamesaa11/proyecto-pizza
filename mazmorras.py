@@ -17,19 +17,16 @@ ESCENARIOS = {
 }
 
 def generar_mapa(ancho=6, largo=20, escenario=None):
-    """Genera un mapa con un camino principal y escenario alrededor"""
+
     if escenario is None:
         escenario = ESCENARIOS[1]
 
-    # mapa lleno de relleno (pasto o similar)
     mapa = [[escenario["relleno"] for _ in range(largo)] for _ in range(ancho)]
 
-    # camino principal
-    fila_camino = ancho // 2  # fila central inicial
+    fila_camino = ancho // 2
     for col in range(largo):
         mapa[fila_camino][col] = escenario["suelo"]
 
-        # curvas aleatorias del camino
         if random.random() < 0.2:
             cambio = random.choice([-1, 1])
             nueva_fila = fila_camino + cambio
@@ -37,12 +34,11 @@ def generar_mapa(ancho=6, largo=20, escenario=None):
                 fila_camino = nueva_fila
                 mapa[fila_camino][col] = escenario["suelo"]
 
-    # inicio del jugador
     inicio = (ancho // 2, 0)
     return mapa, inicio
 
 def mostrar_mapa(mapa, posicion_jugador):
-    """Muestra el mapa en consola con el jugador 🍕"""
+
     for i, fila in enumerate(mapa):
         for j, celda in enumerate(fila):
             if (i, j) == posicion_jugador:
@@ -52,7 +48,7 @@ def mostrar_mapa(mapa, posicion_jugador):
         print()
 
 def mover_jugador(direccion, posicion, mapa):
-    """Mueve al jugador dentro del mapa respetando los límites"""
+
     x, y = posicion
     max_x, max_y = len(mapa), len(mapa[0])
 
@@ -70,7 +66,7 @@ def mover_jugador(direccion, posicion, mapa):
     return (x, y)
 
 def generar_enemigos_en_mapa(maz, mapa):
-    """Genera enemigos en posiciones aleatorias dentro del mapa"""
+
     filas, columnas = len(mapa), len(mapa[0])
     enemigos_disponibles = obtener_enemigos(maz)
     cantidad = random.randint(5, 7)
