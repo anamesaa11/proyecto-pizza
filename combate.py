@@ -1,4 +1,5 @@
 import random
+from utilidades import elegir_item_random, mostrar_inventario
 
 
 def turno_jugador(jugador, enemigo):
@@ -54,20 +55,29 @@ def intentar_huir():
 
 
 def iniciar_combate (jugador, enemigo):
-    print(f'COMBATE! {enemigo}')
+    print(f'⚔️ ¡COMBATE! {enemigo}')
     turno = 1
     vida_pizza = 100
 
     while jugador.con_vida() and enemigo.con_vida():
         print(f'\n--- Turno {turno} ---')
         print(f'Vida 🍕: {vida_pizza}')
-        print(f'👤 {jugador.nombre} | Vida: {jugador.vida}')
+        print(f'👤 {jugador.nombre} | ️Vida: {jugador.vida}')
         print(f'👹 {enemigo.nombre} | Vida: {enemigo.vida}')
 
         turno_jugador(jugador, enemigo)
         if not enemigo.con_vida():
             print(f'⚔️{jugador.nombre} derrotó a {enemigo.nombre} y ganó {enemigo.experiencia} EXP.')
             jugador.ganar_experiencia(enemigo.experiencia)
+
+            if random.random() < 0.6:  #probabilidad de item
+                item_drop = elegir_item_random()
+                mostrar_inventario(jugador)
+                jugador.inventario.append(item_drop)
+                print(f'🎁 {enemigo.nombre} dejó: {item_drop.nombre}')
+            else:
+                print(':( No obtuviste ningún ítem esta vez...') #mmm
+
             break
 
         turno_enemigo(jugador, enemigo)
