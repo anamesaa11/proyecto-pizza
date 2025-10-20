@@ -117,3 +117,16 @@ def generar_enemigos_en_mapa(maz, mapa):
         mapa[x][y] = "😈"
 
     return enemigos_colocados
+
+
+def colocar_salida(mapa):
+    filas, columnas = len(mapa), len(mapa[0])
+
+    for fila in range(filas):
+        if mapa[fila][columnas-1] == "🛣️":
+            mapa[fila][columnas - 1] = "🌀"
+            return (fila, columnas-1)
+
+    mapa[filas-1][columnas-1] = "🌀"
+    return (filas - 1, columnas - 1)
+
