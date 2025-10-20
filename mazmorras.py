@@ -16,6 +16,7 @@ ESCENARIOS = {
         "suelo": "🏰", "relleno": "🔥"}
 }
 
+
 def generar_mapa(ancho=6, largo=20, escenario=None):
 
     if escenario is None:
@@ -37,6 +38,7 @@ def generar_mapa(ancho=6, largo=20, escenario=None):
     inicio = (ancho // 2, 0)
     return mapa, inicio
 
+
 def mostrar_mapa(mapa, posicion_jugador):
 
     for i, fila in enumerate(mapa):
@@ -46,6 +48,7 @@ def mostrar_mapa(mapa, posicion_jugador):
             else:
                 print(celda, end=" ")
         print()
+
 
 def mover_jugador(direccion, posicion, mapa):
 
@@ -63,7 +66,8 @@ def mover_jugador(direccion, posicion, mapa):
     else:
         print("🚫 No puedes moverte en esa dirección.")
 
-    return (x, y)
+    return x, y
+
 
 def generar_enemigos_en_mapa(maz, mapa):
 
@@ -74,16 +78,28 @@ def generar_enemigos_en_mapa(maz, mapa):
     enemigos_colocados = []
     posiciones_ocupadas = set()
 
+    #Define posiciones del camino
+    posiciones_camino = [(i, j) for i in range(filas) for j in range(columnas) if mapa[i][j] == "🛣️"]
+
     for _ in range(cantidad):
         enemigo_base = random.choice(enemigos_disponibles)
 
-        # encontrar posición libre
-        while True:
-            x = random.randint(0, filas - 1)
-            y = random.randint(0, columnas - 1)
-            if (x, y) not in posiciones_ocupadas and mapa[x][y] != "🍕":
-                posiciones_ocupadas.add((x, y))
-                break
+        #Decide si el enemigo va fuera o dentro del camino
+        es_objetivo = random.random() < 0.4
+        if es_objetivo and posiciones_camino:
+            pos = random.choice(posiciones_camino)
+            posiciones_camino.remove(pos)
+        else:
+            # encontrar posición libre
+            while True:
+                x = random.randint(0, filas - 1)
+                y = random.randint(0, columnas - 1)
+                if (x, y) not in posiciones_ocupadas and mapa[x][y] != "🍕":
+                    pos = (x, y)
+                    break
+
+        posiciones_ocupadas.add(pos)
+        x, y = pos
 
         enemigo = Enemigo(
             enemigo_base.nombre,
@@ -97,6 +113,7 @@ def generar_enemigos_en_mapa(maz, mapa):
             enemigo_base.habilidad
         )
 
-        enemigos_colocados.append((x, y, enemigo))
+        enemigos_colocados.append((x, y, enemigo, es_objetivo))
         mapa[x][y] = "😈"
+
     return enemigos_colocados
