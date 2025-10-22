@@ -31,11 +31,10 @@ class Personaje:
 
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
-        print(f'Nombre: {self.nombre} - {self.tipo}')
+        print(f'Nombre: {self.nombre}')
         print(f'Vida: {self.vida} / {self.vidamax}')
         print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
         print(f'Fuerza: {self.fuerza} | Defensa: {self.defensa} | Velocidad: {self.velocidad}')
-        print(f'Inventario: {len(self.inventario)} ítems')
 
     def curar(self, cantidad:int):
         self.vida += cantidad
