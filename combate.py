@@ -22,7 +22,22 @@ def turno_jugador(jugador, enemigo):
             break
 
         elif opcion == '3':
-            print('No tienes Ítems aún.') #IMPLEMENTAR FUNCION DE ITEMS
+            if jugador.inventario:
+                mostrar_inventario(jugador)
+                try:
+                    nro_i = int(input('Selecciona número de ítem para usar (0 para cancelar): '))
+                    if nro_i > 0:
+                        usar = nro_i - 1
+                        if 0 <= usar < len(jugador.inventario):
+                            item = jugador.inventario.pop(usar)
+                            item.usar(jugador)
+                    else:
+                        print('X')
+                except ValueError:
+                    print('Entrada inválida.')
+            else:
+                print('No tienes Ítems aún.')
+            break
 
         elif opcion == '4':
             if intentar_huir():
@@ -42,10 +57,10 @@ def turno_enemigo(jugador, enemigo):
 
     accion = random.choice(['atacar', 'habilidad']) if enemigo.habilidad else 'atacar'
 
-    if accion == 'atacar':
-        enemigo.atacar(jugador)
-    else:
+    if accion == 'habilidad':
         enemigo.usar_habilidad(jugador)
+    else:
+        enemigo.atacar(jugador)
 
     jugador.defendiendo = False
 
@@ -55,15 +70,15 @@ def intentar_huir():
 
 
 def iniciar_combate (jugador, enemigo):
-    print(f'⚔️ ¡COMBATE! {enemigo}')
+    print(f'⚔️ ¡COMBATE! {enemigo.nombre}')
     turno = 1
     vida_pizza = 100
 
     while jugador.con_vida() and enemigo.con_vida():
         print(f'\n--- Turno {turno} ---')
         print(f'Vida 🍕: {vida_pizza}')
-        print(f'👤 {jugador.nombre} | ️Vida: {jugador.vida}')
-        print(f'👹 {enemigo.nombre} | Vida: {enemigo.vida}')
+        print(f'👤 {jugador.nombre} | ️Vida: {jugador.vida}/{jugador.vidamax}')
+        print(f'👹 {enemigo.nombre} | Vida: {enemigo.vida}/{enemigo.vidamax}')
 
         turno_jugador(jugador, enemigo)
         if not enemigo.con_vida():
@@ -72,9 +87,9 @@ def iniciar_combate (jugador, enemigo):
 
             if random.random() < 0.6:  #probabilidad de item
                 item_drop = elegir_item_random()
-                mostrar_inventario(jugador)
                 jugador.inventario.append(item_drop)
                 print(f'🎁 {enemigo.nombre} dejó: {item_drop.nombre}')
+                mostrar_inventario(jugador)
             else:
                 print(':( No obtuviste ningún ítem esta vez...') #mmm
 
