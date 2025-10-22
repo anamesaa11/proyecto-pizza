@@ -1,18 +1,31 @@
 from personajes import Personaje
 
+
 class Jugador(Personaje):
-    def __init__(self, nombre, tipo, vida, fuerza, defensa, velocidad):
-        super().__init__(nombre, tipo, vida, fuerza, defensa, velocidad, experiencia=0, nivel=1)
+    def __init__(self, nombre, tipo, vida, fuerza, defensa, velocidad, habilidad=None):
+        super().__init__(nombre=nombre,
+                         vida=vida,
+                         fuerza=fuerza,
+                         defensa=defensa,
+                         velocidad=velocidad,
+                         experiencia=0,
+                         nivel=1,
+                         habilidad=habilidad)
         self.tipo = tipo
         self.inventario = []
         self.estado = 'Normal'
-
+        self.defendiendo = False
 
     def mostrar_estado(self):
-        super().mostrar_estado()
-        print(f'Clase: {self.tipo}')
+        #super().mostrar_estado()
+        #print(f'Clase: {self.tipo}')
+        #print(f'Inventario: {len(self.inventario)} ítems | Estado: {self.estado}')
+        print('-- ESTADO DEL JUGADOR --')
+        print(f'Nombre: {self.nombre} - {self.tipo}')
+        print(f'Vida: {self.vida} / {self.vidamax}')
+        print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
+        print(f'Fuerza: {self.fuerza} | Defensa: {self.defensa} | Velocidad: {self.velocidad}')
         print(f'Inventario: {len(self.inventario)} ítems | Estado: {self.estado}')
-
 
     def subir_nivel(self):
         self.nivel += 1
@@ -24,13 +37,11 @@ class Jugador(Personaje):
         self.velocidad += 2
         print(f'{self.nombre} sube a nivel {self.nivel}!')
 
-
     def ganar_experiencia(self, cantidad:int):
         self.experiencia += cantidad
-        print(f'{self.nombre} gana {cantidad} de experiencia.')
         if self.experiencia >= 100:
             self.subir_nivel()
-
+            
 
 def crear_personaje_mazmorra(maz):
     if maz == 1:
