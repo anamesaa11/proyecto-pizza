@@ -18,7 +18,6 @@ ESCENARIOS = {
 
 
 def generar_mapa(ancho=6, largo=20, escenario=None):
-
     if escenario is None:
         escenario = ESCENARIOS[1]
 
@@ -40,18 +39,18 @@ def generar_mapa(ancho=6, largo=20, escenario=None):
 
 
 def mostrar_mapa(mapa, posicion_jugador):
-
     for i, fila in enumerate(mapa):
+        fila_str = ""
         for j, celda in enumerate(fila):
             if (i, j) == posicion_jugador:
-                print("🍕", end=" ")
+                fila_str += "🍕"
             else:
-                print(celda, end=" ")
-        print()
+                fila_str += str(celda) + " "
+        print(fila_str)
+    print()
 
 
 def mover_jugador(direccion, posicion, mapa):
-
     x, y = posicion
     max_x, max_y = len(mapa), len(mapa[0])
 
@@ -102,15 +101,15 @@ def generar_enemigos_en_mapa(maz, mapa):
         x, y = pos
 
         enemigo = Enemigo(
-            enemigo_base.nombre,
-            enemigo_base.nivel,
-            enemigo_base.vida,
-            enemigo_base.ataque,
-            enemigo_base.defensa,
-            enemigo_base.velocidad,
-            enemigo_base.experiencia,
-            enemigo_base.comportamiento,
-            enemigo_base.habilidad
+            nombre=enemigo_base.nombre,
+            nivel=enemigo_base.nivel,
+            vida=enemigo_base.vida,
+            fuerza=enemigo_base.fuerza,
+            defensa=enemigo_base.defensa,
+            velocidad=enemigo_base.velocidad,
+            experiencia=enemigo_base.experiencia,
+            comportamiento=enemigo_base.comportamiento,
+            habilidad=enemigo_base.habilidad
         )
 
         enemigos_colocados.append((x, y, enemigo, es_objetivo))
@@ -123,10 +122,10 @@ def colocar_salida(mapa):
     filas, columnas = len(mapa), len(mapa[0])
 
     for fila in range(filas):
-        if mapa[fila][columnas-1] == "🛣️":
+        if mapa[fila][columnas - 1] == "🛣️":
             mapa[fila][columnas - 1] = "🌀"
-            return (fila, columnas-1)
+            return (fila, columnas - 1)
 
-    mapa[filas-1][columnas-1] = "🌀"
+    mapa[filas - 1][columnas - 1] = "🌀"
     return (filas - 1, columnas - 1)
 

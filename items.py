@@ -1,3 +1,6 @@
+import random
+
+
 class Item:
     def __init__(self, nombre, tipo, efecto, valor):
         self.nombre = nombre
@@ -24,7 +27,6 @@ class Item:
         return f"{self.nombre} ({self.tipo}, {self.efecto} +{self.valor})"
 
 
-
 pocion_vida = Item("Poción de Vida", "consumible", "vida", 30)
 espada = Item("Espátula de Hierro", "equipable", "fuerza", 5)
 escudo = Item("Caja de Cartón", "equipable", "defensa", 3)
@@ -32,7 +34,7 @@ botas = Item("Zapatillas de Reparto", "equipable", "velocidad", 2)
 elixir = Item("Elixir de Queso Fundido", "consumible", "vida", 50)
 
 lista_items = [pocion_vida, espada, escudo, botas, elixir]
-import random
+
 
 def generar_item():
     """Devuelve un ítem aleatorio de la lista."""

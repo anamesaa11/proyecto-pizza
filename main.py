@@ -1,15 +1,14 @@
-from Jugador import Jugador, crear_personaje_mazmorra
-from enemigos import obtener_enemigos
-from utilidades import mostrar_inventario, usar_item_inventario, limpiar_pantalla
+from Jugador import crear_personaje_mazmorra
+from utilidades import limpiar_pantalla
 from mazmorras import generar_mapa, mostrar_mapa, mover_jugador, ESCENARIOS, generar_enemigos_en_mapa, colocar_salida
 from combate import iniciar_combate
-
 
 
 def jugar_mazmorra(maz):
     limpiar_pantalla()
     print(f'\n -- NIVEL {maz} --')
     escenario = ESCENARIOS.get(maz, ESCENARIOS[1])
+    print(f'{escenario['nombre']}\n {escenario['descripcion']}\n')
 
     #Crea el personaje en la mazmorra
     jugador = crear_personaje_mazmorra(maz)
@@ -20,7 +19,7 @@ def jugar_mazmorra(maz):
 
     #Enemigos en el mapa
     enemigos_colocados = generar_enemigos_en_mapa(maz, mapa)
-    enemigos_objetivo = sum(1 for e in enemigos_colocados if e[3]) # Contar enemigos
+    enemigos_objetivo = sum(1 for e in enemigos_colocados if e[3])  # Contar enemigos
     portal_pos = None
 
     while True:
@@ -44,7 +43,7 @@ def jugar_mazmorra(maz):
                         enemigos_objetivo -= 1
                         print(f'📉 Enemigos del camino restantes: {enemigos_objetivo}')
                 #Enemigos derrotados
-                enemigos_colocados = [e for e in enemigos_colocados if e[2].con_vida()] #ver
+                enemigos_colocados = [e for e in enemigos_colocados if e[2].con_vida()]
                 break
 
         if enemigos_objetivo == 0 and portal_pos is None:
@@ -54,10 +53,10 @@ def jugar_mazmorra(maz):
         if portal_pos and jugador_pos == portal_pos:
             print('Avanzando al siguiente nivel.')
             if maz < 3:  # si no es la última
-                input('Presiona ENTER para pasar a la siguiente mazmorra...')
+                input('Presiona ENTER para avanzar...')
                 jugar_mazmorra(maz + 1)
             else:
-                print('\n🏆 ¡Has completado todas las mazmorras! 🏆')
+                print('\n ¡Ganaste :D! 🏆')
             break
 
 
