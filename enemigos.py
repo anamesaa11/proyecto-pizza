@@ -1,11 +1,18 @@
 import random
 from personajes import Personaje
 
-class Enemigo(Personaje):
-    def __init__(self, nombre, nivel, vida, fuerza, defensa, velocidad, experiencia, comportamiento, habilidad):
-        super().__init__(nombre=nombre, vida=vida, fuerza=fuerza, defensa=defensa, velocidad=velocidad, experiencia=experiencia, nivel=nivel, habilidad=habilidad)
-        self.comportamiento = comportamiento
 
+class Enemigo(Personaje):
+    def __init__(self, nombre, nivel, vida, fuerza, defensa, velocidad, experiencia, comportamiento, habilidad=None):
+        super().__init__(nombre=nombre,
+                         vida=vida,
+                         fuerza=fuerza,
+                         defensa=defensa,
+                         velocidad=velocidad,
+                         experiencia=experiencia,
+                         nivel=nivel,
+                         habilidad=habilidad)
+        self.comportamiento = comportamiento
 
     #Sobreescribir atacar
     def atacar(self, jugador):
