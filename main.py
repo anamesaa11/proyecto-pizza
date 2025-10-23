@@ -8,6 +8,7 @@ def jugar_mazmorra(maz):
     limpiar_pantalla()
     print(f'\n -- NIVEL {maz} --')
     escenario = ESCENARIOS.get(maz, ESCENARIOS[1])
+    suelo_actual = escenario["suelo"]
     print(f'{escenario['nombre']}\n {escenario['descripcion']}\n')
 
     #Crea el personaje en la mazmorra
@@ -29,7 +30,7 @@ def jugar_mazmorra(maz):
             print('🏃 Saliste de la mapa.')
             break
 
-        jugador_pos = mover_jugador(mov, jugador_pos, mapa)
+        jugador_pos = mover_jugador(mov, jugador_pos, mapa, suelo_actual)
 
         #Combate
         for (ex, ey, enemigo, es_objetivo) in enemigos_colocados:
@@ -38,7 +39,9 @@ def jugar_mazmorra(maz):
                 iniciar_combate(jugador, enemigo)
 
                 if not enemigo.con_vida():
-                    mapa[ex][ey] = "🛣️"
+#
+                    print(f'\n💀Derrotaste al {enemigo.nombre}!')
+                    mapa[ex][ey] = suelo_actual
                     if es_objetivo:
                         enemigos_objetivo -= 1
                         print(f'📉 Enemigos del camino restantes: {enemigos_objetivo}')
@@ -48,14 +51,16 @@ def jugar_mazmorra(maz):
 
         if enemigos_objetivo == 0 and portal_pos is None:
             print(f'\n¡Camino liberado!¡Mazmorra {maz} completada!')
-            portal_pos = colocar_salida(mapa)
+            portal_pos = colocar_salida(mapa, escenario)
 
         if portal_pos and jugador_pos == portal_pos:
+#
             print('Avanzando al siguiente nivel.')
             if maz < 3:  # si no es la última
                 input('Presiona ENTER para avanzar...')
                 jugar_mazmorra(maz + 1)
             else:
+                limpiar_pantalla()
                 print('\n ¡Ganaste :D! 🏆')
             break
 

@@ -19,14 +19,14 @@ class Personaje:
         self.vida -= dano_recibido
         if self.vida < 0:
             self.vida = 0
-        print(f'{self.nombre} recibe {dano_recibido} de daño. Vida restante {self.vida}')
+        print(f'- {self.nombre} recibe {dano_recibido} de daño') #| Vida restante {self.vida}')
         
         if self.vida == 0:
             print(f'{self.nombre} ha sido eliminado.')
 
     def atacar(self, objetivo):
         dano_base = self.fuerza
-        print(f"{self.nombre} ataca a {objetivo.nombre}. Causa {dano_base} de daño (antes de defensa).")
+        print(f'\n⚔️ {self.nombre} ataca a {objetivo.nombre}. | Causa {dano_base} de daño.')
         objetivo.recibir_dano(dano_base)
 
     def mostrar_estado(self):
@@ -40,4 +40,4 @@ class Personaje:
         self.vida += cantidad
         if self.vida > self.vidamax:
             self.vida = self.vidamax
-        print(f'{self.nombre} recupera {cantidad} de vida. Vida actual: {self.vida}')
+        print(f'{self.nombre} recupera {cantidad} de vida | Vida actual: {self.vida}')

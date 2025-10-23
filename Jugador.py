@@ -45,11 +45,11 @@ class Jugador(Personaje):
 
 def crear_personaje_mazmorra(maz):
     if maz == 1:
-        return Jugador('Greg', 'Plebeyo 👞', vida=80, fuerza=8, defensa=10, velocidad=10)
+        return Jugador('Greg', 'Plebeyo👞', vida=80, fuerza=8, defensa=10, velocidad=10)
     elif maz == 2:
-        return Jugador('Bruto', 'Bárbaro 🪓', vida=120, fuerza=20, defensa=6, velocidad=5)
+        return Jugador('Bruto', 'Bárbaro🪓', vida=120, fuerza=20, defensa=6, velocidad=5)
     elif maz == 3:
-        return Jugador('Nox', 'Hechicero 🔮', vida=150, fuerza=10, defensa=20, velocidad=15)
+        return Jugador('Nox', 'Hechicero🔮', vida=150, fuerza=10, defensa=20, velocidad=15)
     else:
         raise ValueError('Número de mazmorra inválido')
 
