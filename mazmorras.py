@@ -10,7 +10,7 @@ ESCENARIOS = {
         "suelo": "🌳", "relleno": "🍄"},
     3: {"nombre": "Mazmorra 3 – Cielos de Pepperoni ☁️",
         "descripcion": "Nubes de queso flotante y tormentas de orégano.",
-        "suelo": "☁️", "relleno": "🪶"},
+        "suelo": "🪶", "relleno": "☁️"},
     4: {"nombre": "Mazmorra 4 – Castillo del Dragón 🏰🔥",
         "descripcion": "El último desafío antes de entregar la Gran Pizza Suprema.",
         "suelo": "🏰", "relleno": "🔥"}
@@ -50,9 +50,10 @@ def mostrar_mapa(mapa, posicion_jugador):
     print()
 
 
-def mover_jugador(direccion, posicion, mapa):
+def mover_jugador(direccion, posicion, mapa, suelo_actual):
     x, y = posicion
     max_x, max_y = len(mapa), len(mapa[0])
+    mapa[x][y] = suelo_actual
 
     if direccion == "w" and x > 0:
         x -= 1
@@ -118,14 +119,14 @@ def generar_enemigos_en_mapa(maz, mapa):
     return enemigos_colocados
 
 
-def colocar_salida(mapa):
+def colocar_salida(mapa, escenario):
     filas, columnas = len(mapa), len(mapa[0])
+    suelo = escenario["suelo"]
 
     for fila in range(filas):
-        if mapa[fila][columnas - 1] == "🛣️":
+        if mapa[fila][columnas - 1] == suelo:
             mapa[fila][columnas - 1] = "🌀"
-            return (fila, columnas - 1)
+            return fila, columnas - 1
 
     mapa[filas - 1][columnas - 1] = "🌀"
-    return (filas - 1, columnas - 1)
-
+    return filas - 1, columnas - 1
