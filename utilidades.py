@@ -29,6 +29,10 @@ def usar_item_inventario(personaje, indice):
         print("Índice inválido.")
 
 
+def limpiar_suave():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
 def limpiar_pantalla():
     if os.name == "nt":
         os.system("cls")

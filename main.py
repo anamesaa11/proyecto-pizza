@@ -1,10 +1,11 @@
 from Jugador import crear_personaje_mazmorra
-from utilidades import limpiar_pantalla
+from utilidades import limpiar_pantalla, limpiar_suave
 from mazmorras import generar_mapa, mostrar_mapa, mover_jugador, ESCENARIOS, generar_enemigos_en_mapa, colocar_salida
 from combate import iniciar_combate
 
 
 def jugar_mazmorra(maz):
+    #limpiar_suave()
     limpiar_pantalla()
     print(f'\n -- NIVEL {maz} --')
     escenario = ESCENARIOS.get(maz, ESCENARIOS[1])
@@ -24,6 +25,7 @@ def jugar_mazmorra(maz):
     portal_pos = None
 
     while True:
+        limpiar_pantalla()
         mostrar_mapa(mapa, jugador_pos)
         mov = input('Mover (w/a/s/d, q para salir): ')
         if mov == 'q':

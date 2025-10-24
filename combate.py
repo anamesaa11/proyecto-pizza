@@ -46,7 +46,7 @@ def turno_jugador(jugador, enemigo):
                 enemigo.vida = 0
                 break
             else:
-                print('No pudiste huir.')
+                print('\nNo pudiste huir.')
                 break
         else:
             print('Opción no válida. Intenta de nuevo.')
