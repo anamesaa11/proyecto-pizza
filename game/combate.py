@@ -61,7 +61,10 @@ def turno_enemigo(jugador, enemigo):
     if not enemigo.con_vida():
         return
 
-    accion = random.choice(['atacar', 'habilidad']) if enemigo.habilidad else 'atacar'
+    if enemigo.habilidad:
+        accion = random.choice(['atacar', 'habilidad'])
+    else:
+        accion = 'atacar'
 
     if accion == 'habilidad':
         enemigo.usar_habilidad(jugador)

@@ -4,6 +4,33 @@ from game.mazmorras import (generar_mapa, mostrar_mapa, mover_jugador,
                             generar_enemigos_en_mapa, colocar_salida)
 from game.combate import iniciar_combate
 from config.game_data import ESCENARIOS_DATA
+import time
+
+
+def final_juego(jugador):
+    limpiar_pantalla()
+    mostrar_texto_lento('🍕 Después de un largo viaje, atravesando 3 mazmorras...')
+    mostrar_texto_lento('🔥 Venciendo dragones, duendes y ladrones hambrientos...')
+    mostrar_texto_lento(f'👤 Finalmente, {jugador.nombre} llega al castillo del cliente.')
+    time.sleep(1)
+
+    limpiar_pantalla()
+    mostrar_texto_lento('🏰 El cliente abre la puerta lentamente...')
+    mostrar_texto_lento(' 👤 - ¡Al fin! Pensé que nunca llegaría mi pizza.')
+    mostrar_texto_lento(' 🍕 - Está un poco fría... pero huele deliciosa.')
+    mostrar_texto_lento(' 👤 - Toma tu propina, valiente repartidor.')
+    time.sleep(1.5)
+
+    limpiar_pantalla()
+    mostrar_texto_lento('💰 Has recibido 1000 monedas de oro en propina $.')
+    mostrar_texto_lento('🏆 ¡Has completado la GRAN ENTREGA!')
+    mostrar_texto_lento(f'👏 Felicitaciones {jugador.nombre}, ¡has salvado el negocio!')
+    time.sleep(1.5)
+
+    limpiar_pantalla()
+    mostrar_texto_lento('🎬 FIN DEL JUEGO')
+    print('\nGracias por jugar 🍕⚔️')
+    input('\nPresiona ENTER para volver al menú principal...')
 
 
 def jugar_mazmorra(maz):
@@ -24,7 +51,10 @@ def jugar_mazmorra(maz):
 
     #Enemigos en el mapa
     enemigos_colocados = generar_enemigos_en_mapa(maz, mapa)
-    enemigos_objetivo = sum(1 for e in enemigos_colocados if e[3])  # Contar enemigos
+    enemigos_objetivo = 0
+    for enemigo in enemigos_colocados:
+        if enemigo[3]:
+            enemigos_objetivo += 1  # Contar enemigos
     portal_pos = None
 
     print(f'\nObjetivo: Elimina {enemigos_objetivo} enemigos del camino para abrir el portal.')
@@ -79,8 +109,7 @@ def jugar_mazmorra(maz):
                 input('Presiona ENTER para avanzar...')
                 return jugar_mazmorra(maz + 1)
             else:
-                print('¡FELICITACIONES!')
-                mostrar_texto_lento('\n ¡Ganaste :D! 🏆')
+                final_juego(jugador)
                 return True
 
     return False
@@ -118,7 +147,7 @@ def main():
                 input('\nPresiona ENTER para volver al menú principal...')
 
         elif opcion == '2':
-            print('Gracias por jugar')
+            print('Gracias por jugar ❤️')
             break
 
         else:
