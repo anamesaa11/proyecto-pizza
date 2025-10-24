@@ -1,7 +1,7 @@
 #Datos del Juego
 
 #Escenarios de las Mazmorras
-ESCENARIOS = {
+ESCENARIOS_DATA = {
     1: {"nombre": "Mazmorra 1 – Pueblo 🏘️",
         "descripcion": "Callejones llenos de ladrones y clientes exigentes.",
         "suelo": "🛣️",
