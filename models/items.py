@@ -1,4 +1,7 @@
+#Sistema de items
+
 import random
+from config.game_data import ITEMS_DATA
 
 
 class Item:
@@ -27,18 +30,24 @@ class Item:
         return f"{self.nombre} ({self.tipo}, {self.efecto} +{self.valor})"
 
 
-pocion_vida = Item("Poción de Vida", "consumible", "vida", 30)
-espada = Item("Espátula de Hierro", "equipable", "fuerza", 5)
-escudo = Item("Caja de Cartón", "equipable", "defensa", 3)
-botas = Item("Zapatillas de Reparto", "equipable", "velocidad", 2)
-elixir = Item("Elixir de Queso Fundido", "consumible", "vida", 50)
+def crear_items():
+    items = []
+    for datos in ITEMS_DATA:
+        item = Item(
+            nombre=datos["nombre"],
+            tipo=datos["tipo"],
+            efecto=datos["efecto"],
+            valor=datos["valor"]
+        )
+        items.append(item)
 
-lista_items = [pocion_vida, espada, escudo, botas, elixir]
+    return items
 
 
 def generar_item():
     """Devuelve un ítem aleatorio de la lista."""
-    item = random.choice(lista_items)
+    items_disponibles = crear_items()
+    item = random.choice(items_disponibles)
     print(f"Has encontrado un {item.nombre} 🎁")
     return item
 
