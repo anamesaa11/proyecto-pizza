@@ -41,8 +41,9 @@ def turno_jugador(jugador, enemigo):
 
         elif opcion == '4':
             if intentar_huir():
-                print('🏃‍♂️ Lograste huir del combate.')
-                enemigo.vida = 0    #Esto seria FIN DEL COMBATE
+                print('\n🏃‍♂️ Lograste huir del combate.')
+                #fin del combate
+                enemigo.vida = 0
                 break
             else:
                 print('No pudiste huir.')
@@ -66,10 +67,11 @@ def turno_enemigo(jugador, enemigo):
 
 
 def intentar_huir():
-    return random.random() < 0.5 #probabilidad de HUIR
+    #probabilidad de huir
+    return random.random() < 0.5
 
 
-def iniciar_combate (jugador, enemigo):
+def iniciar_combate(jugador, enemigo):
     print(f'⚔️ ¡COMBATE! {enemigo.nombre}')
     turno = 1
     vida_pizza = 100
@@ -82,27 +84,28 @@ def iniciar_combate (jugador, enemigo):
 
         turno_jugador(jugador, enemigo)
         if not enemigo.con_vida():
-            print(f'⚔️{jugador.nombre} derrotó a {enemigo.nombre} y ganó {enemigo.experiencia} EXP.')
+            print(f'\n⚔️ {jugador.nombre} derrotó a {enemigo.nombre} y ganó {enemigo.experiencia} EXP.')
             jugador.ganar_experiencia(enemigo.experiencia)
 
-            if random.random() < 0.6:  #probabilidad de item
+            # probabilidad de item
+            if random.random() < 0.6:
                 item_drop = elegir_item_random()
                 jugador.inventario.append(item_drop)
-                print(f'🎁 {enemigo.nombre} dejó: {item_drop.nombre}')
+                print(f'\n🎁 {enemigo.nombre} dejó: {item_drop.nombre}')
                 mostrar_inventario(jugador)
             else:
-                print(':( No obtuviste ningún ítem esta vez...') #mmm
+                print('\n:( No obtuviste ningún ítem esta vez...')
 
             break
 
         turno_enemigo(jugador, enemigo)
         if not jugador.con_vida():
-            print(f'💀 {jugador.nombre} ha caído en combate...')
+            print(f'\n💀 {jugador.nombre} ha caído en combate...')
             break
 
         vida_pizza -= 5
         if vida_pizza <= 0:
-            print('❌ La pizza se ha enfriado demasiado. Perdiste :(')
+            print('\n❌ La pizza se ha enfriado demasiado. Perdiste :(')
             break
 
         turno += 1

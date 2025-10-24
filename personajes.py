@@ -1,5 +1,5 @@
 class Personaje:
-    def __init__ (self, nombre, vida, fuerza, defensa, velocidad, experiencia=0, nivel=1, habilidad=None):
+    def __init__(self, nombre, vida, fuerza, defensa, velocidad, experiencia=0, nivel=1, habilidad=None):
         self.nombre = nombre
         self.vida = vida
         self.vidamax = vida
@@ -14,12 +14,12 @@ class Personaje:
     def con_vida(self):
         return self.vida > 0
     
-    def recibir_dano(self, cantidad:int):
+    def recibir_dano(self, cantidad: int):
         dano_recibido = max(0, cantidad - self.defensa)
         self.vida -= dano_recibido
         if self.vida < 0:
             self.vida = 0
-        print(f'- {self.nombre} recibe {dano_recibido} de daño') #| Vida restante {self.vida}')
+        print(f'- {self.nombre} recibe {dano_recibido} de daño')
         
         if self.vida == 0:
             print(f'{self.nombre} ha sido eliminado.')
@@ -36,7 +36,7 @@ class Personaje:
         print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
         print(f'Fuerza: {self.fuerza} | Defensa: {self.defensa} | Velocidad: {self.velocidad}')
 
-    def curar(self, cantidad:int):
+    def curar(self, cantidad: int):
         self.vida += cantidad
         if self.vida > self.vidamax:
             self.vida = self.vidamax

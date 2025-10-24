@@ -37,7 +37,7 @@ class Jugador(Personaje):
         self.velocidad += 2
         print(f'{self.nombre} sube a nivel {self.nivel}!')
 
-    def ganar_experiencia(self, cantidad:int):
+    def ganar_experiencia(self, cantidad: int):
         self.experiencia += cantidad
         if self.experiencia >= 100:
             self.subir_nivel()
@@ -52,4 +52,3 @@ def crear_personaje_mazmorra(maz):
         return Jugador('Nox', 'Hechicero🔮', vida=150, fuerza=10, defensa=20, velocidad=15)
     else:
         raise ValueError('Número de mazmorra inválido')
-
