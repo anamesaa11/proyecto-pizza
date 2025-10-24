@@ -1,50 +1,23 @@
 from models.Jugador import crear_personaje_mazmorra
-from utils.utilidades import limpiar_pantalla, mostrar_titulo_juego, mostrar_texto_lento
+from utils.utilidades import limpiar_pantalla, mostrar_titulo_juego, mostrar_texto_lento, final_juego
 from game.mazmorras import (generar_mapa, mostrar_mapa, mover_jugador,
                             generar_enemigos_en_mapa, colocar_salida)
 from game.combate import iniciar_combate
 from config.game_data import ESCENARIOS_DATA
-import time
-
-
-def final_juego(jugador):
-    limpiar_pantalla()
-    mostrar_texto_lento('🍕 Después de un largo viaje, atravesando 3 mazmorras...')
-    mostrar_texto_lento('🔥 Venciendo dragones, duendes y ladrones hambrientos...')
-    mostrar_texto_lento(f'👤 Finalmente, {jugador.nombre} llega al castillo del cliente.')
-    time.sleep(1)
-
-    limpiar_pantalla()
-    mostrar_texto_lento('🏰 El cliente abre la puerta lentamente...')
-    mostrar_texto_lento(' 👤 - ¡Al fin! Pensé que nunca llegaría mi pizza.')
-    mostrar_texto_lento(' 🍕 - Está un poco fría... pero huele deliciosa.')
-    mostrar_texto_lento(' 👤 - Toma tu propina, valiente repartidor.')
-    time.sleep(1.5)
-
-    limpiar_pantalla()
-    mostrar_texto_lento('💰 Has recibido 1000 monedas de oro en propina $.')
-    mostrar_texto_lento('🏆 ¡Has completado la GRAN ENTREGA!')
-    mostrar_texto_lento(f'👏 Felicitaciones {jugador.nombre}, ¡has salvado el negocio!')
-    time.sleep(1.5)
-
-    limpiar_pantalla()
-    mostrar_texto_lento('🎬 FIN DEL JUEGO')
-    print('\nGracias por jugar 🍕⚔️')
-    input('\nPresiona ENTER para volver al menú principal...')
 
 
 def jugar_mazmorra(maz):
     #limpiar_suave()
     limpiar_pantalla()
-    print(f'\n -- NIVEL {maz} --')
+    print(f'\n --- NIVEL {maz} ---')
     escenario = ESCENARIOS_DATA.get(maz, ESCENARIOS_DATA[1])
-    print(f'{escenario["nombre"]}\n {escenario["descripcion"]}\n')
+    print(f'{escenario["nombre"]}\n 📖 {escenario["descripcion"]}\n')
 
     #Crea el personaje en la mazmorra
     jugador = crear_personaje_mazmorra(maz)
     jugador.mostrar_estado()
 
-    input('\nPresiona ENTER para comenzar...')
+    input('\n🎮 Presiona ENTER para comenzar...')
 
     mapa, posicion_inicio = generar_mapa(5, 20, escenario=escenario)
     jugador_pos = posicion_inicio
@@ -57,17 +30,17 @@ def jugar_mazmorra(maz):
             enemigos_objetivo += 1  # Contar enemigos
     portal_pos = None
 
-    print(f'\nObjetivo: Elimina {enemigos_objetivo} enemigos del camino para abrir el portal.')
+    print(f'\n🎯 Objetivo: Elimina {enemigos_objetivo} enemigos del camino para abrir el portal.')
 
     while True:
         limpiar_pantalla()
 
         print(f'{escenario["nombre"]}')
-        print(f'Enemigos restantes en el camino: {enemigos_objetivo}')
+        print(f'🎯 Enemigos restantes en el camino: {enemigos_objetivo}')
 
         mostrar_mapa(mapa, jugador_pos)
 
-        mov = input('Mover (w/a/s/d, q para salir): ')
+        mov = input('🎮 Mover (w/a/s/d, q para salir): ')
         if mov == 'q':
             print('🏃 Saliste de la mapa.')
             break
@@ -85,28 +58,28 @@ def jugar_mazmorra(maz):
 
                 if not enemigo.con_vida():
 
-                    print(f'\n💀Derrotaste al {enemigo.nombre}!')
+                    print(f'\n💀 Derrotaste al {enemigo.nombre}!')
                     mapa[ex][ey] = escenario["suelo"]
                     if es_objetivo:
                         enemigos_objetivo -= 1
-                        print(f'Enemigos del camino restantes: {enemigos_objetivo}')
+                        print(f'🎯 Enemigos del camino restantes: {enemigos_objetivo}')
 
                 #Enemigos derrotados
                     enemigos_colocados.remove((ex, ey, enemigo, es_objetivo))
                 elif not jugador.con_vida():
-                    print('\nPerdiste ... :(')
+                    print('\n💀 Perdiste ... :(')
                     return False
                 break
 
         if enemigos_objetivo == 0 and portal_pos is None:
-            print(f'\n¡Camino liberado!')
-            mostrar_texto_lento(f'¡Mazmorra {maz} completada!')
+            print(f'\n🎉 ¡Camino liberado!')
+            mostrar_texto_lento(f'✨ ¡Mazmorra {maz} completada! ✨')
             portal_pos = colocar_salida(mapa, escenario)
 
         if portal_pos and jugador_pos == portal_pos:
             if maz < 3:  # si no es la última
-                mostrar_texto_lento('Avanzando al siguiente nivel...')
-                input('Presiona ENTER para avanzar...')
+                mostrar_texto_lento('🌀 Avanzando al siguiente nivel...')
+                input('🎮 Presiona ENTER para avanzar...')
                 return jugar_mazmorra(maz + 1)
             else:
                 final_juego(jugador)
@@ -119,40 +92,40 @@ def mostrar_menu():
     limpiar_pantalla()
     mostrar_titulo_juego()
 
-    print('MENÚ PRINCIPAL')
+    print('\n🎮 MENÚ PRINCIPAL 🎮')
     print('=' * 30)
-    print('1. Nueva Aventura')
-    print('2. Salir')
+    print('1. 🪄 Nueva Aventura')
+    print('2. 🚪 Salir')
     print('=' * 30)
 
 
 def main():
     while True:
         mostrar_menu()
-        opcion = input('Elige una opción: ').strip()
+        opcion = input('📍 Elige una opción: ').strip()
 
         if opcion == '1':
-            print('\n🚀 ¡Comenzando nueva aventura!')
+            print('\n🪄 ¡Comenzando nueva aventura!')
             mostrar_texto_lento('🍕 Un cliente ha pedido una pizza...')
             mostrar_texto_lento('📍 Pero vive al otro lado de 3 peligrosas mazmorras...')
             mostrar_texto_lento('⚔️ ¿Podrás entregarla a tiempo?')
 
-            input('\nPresiona ENTER para comenzar...')
+            input('\n🎮 Presiona ENTER para comenzar...')
 
             resultado = jugar_mazmorra(1)
 
             if resultado:
-                input('\nPresiona ENTER para volver al menú principal')
+                input('\n🎮 Presiona ENTER para volver al menú principal')
             else:
-                input('\nPresiona ENTER para volver al menú principal...')
+                input('\n🎮 Presiona ENTER para volver al menú principal...')
 
         elif opcion == '2':
             print('Gracias por jugar ❤️')
             break
 
         else:
-            print('Opcion no válida. Intenta de nuevo.')
-            input('Presiona ENTER para continuar')
+            print('💥 Opcion no válida. Intenta de nuevo.')
+            input('🎮 Presiona ENTER para continuar')
 
 
 if __name__ == "__main__":

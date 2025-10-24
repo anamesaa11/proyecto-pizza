@@ -31,7 +31,7 @@ PERSONAJES_BASE = {
     },
     2: {
         "nombre": "Bruto",
-        "tipo": "Bárbaro",
+        "tipo": "Bárbaro 🪓",
         "vida": 120,
         "fuerza": 20,
         "defensa": 6,
@@ -39,7 +39,7 @@ PERSONAJES_BASE = {
     },
     3: {
         "nombre": "Nox",
-        "tipo": "Hechicero",
+        "tipo": "Hechicero 🔮",
         "vida": 150,
         "fuerza": 10,
         "defensa": 20,
@@ -124,31 +124,31 @@ ENEMIGOS_DATA = {
 
 ITEMS_DATA = [
     {
-        "nombre": "Poción de Vida",
+        "nombre": "Poción de Vida 🧉",
         "tipo": "consumible",
         "efecto": "vida",
         "valor": 30
     },
     {
-        "nombre": "Espátula de Hierro",
+        "nombre": "Espátula de Hierro 🔪",
         "tipo": "equipable",
         "efecto": "fuerza",
         "valor": 10
     },
     {
-        "nombre": "Caja de Cartón",
+        "nombre": "Caja de Cartón 🍱",
         "tipo": "equipable",
         "efecto": "defensa",
         "valor": 3
     },
     {
-        "nombre": "Zapatillas de Reparto",
+        "nombre": "Zapatillas de Reparto 👞",
         "tipo": "equipable",
         "efecto": "velocidad",
         "valor": 5
     },
     {
-        "nombre": "Elixir de Queso Fundido",
+        "nombre": "Elixir de Queso Fundido 🫕",
         "tipo": "consumible",
         "efecto": "vida",
         "valor": 50

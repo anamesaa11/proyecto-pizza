@@ -15,14 +15,14 @@ def turno_jugador(jugador, enemigo):
         print('3️⃣ Usar ítem')
         print('4️⃣ Intentar huir')
 
-        opcion = input('ELige una opción: ')
+        opcion = input('📍 ELige una opción: ')
 
         if opcion == '1':
             jugador.atacar(enemigo)
             break
 
         elif opcion == '2':
-            print(f'{jugador.nombre} se prepara para defenderse!')
+            print(f'🛡️ {jugador.nombre} se prepara para defenderse!')
             jugador.defendiendo = True
             break
 
@@ -30,7 +30,7 @@ def turno_jugador(jugador, enemigo):
             if len(jugador.inventario) > 0:
                 mostrar_inventario(jugador)
                 try:
-                    nro_i = int(input('Selecciona número de ítem para usar (0 para cancelar): '))
+                    nro_i = int(input('📍 Selecciona número de ítem para usar (0 para cancelar): '))
                     if nro_i > 0:
                         usar = nro_i - 1
                         if 0 <= usar < len(jugador.inventario):
@@ -39,9 +39,9 @@ def turno_jugador(jugador, enemigo):
                     else:
                         print('X')
                 except ValueError:
-                    print('Entrada inválida.')
+                    print('💥 Entrada inválida.')
             else:
-                print('No tienes Ítems en tu inventario.')
+                print('❗ No tienes Ítems en tu inventario.')
             break
 
         elif opcion == '4':
@@ -51,10 +51,10 @@ def turno_jugador(jugador, enemigo):
                 enemigo.vida = 0
                 break
             else:
-                print('\nNo pudiste huir.')
+                print('\n❗ No pudiste huir.')
                 break
         else:
-            print('Opción no válida. Intenta de nuevo.')
+            print('💥 Opción no válida. Intenta de nuevo.')
 
 
 def turno_enemigo(jugador, enemigo):
@@ -80,7 +80,7 @@ def intentar_huir():
 
 
 def iniciar_combate(jugador, enemigo):
-    print(f'⚔️ ¡COMBATE! {enemigo.nombre}')
+    print(f'⚔️ ¡COMBATE! {enemigo.nombre} ⚔️')
     print(f'🍕 vs 👹')
     turno = 1
     vida_pizza = VIDA_PIZZA_INICIAL
@@ -95,7 +95,6 @@ def iniciar_combate(jugador, enemigo):
 
         if not enemigo.con_vida():
             print(f'\n⚔️ ¡{jugador.nombre} derrotó a {enemigo.nombre}!')
-            print(f'Ganaste {enemigo.experiencia} puntos de EXP.')
             jugador.ganar_experiencia(enemigo.experiencia)
 
             # probabilidad de item
@@ -105,7 +104,7 @@ def iniciar_combate(jugador, enemigo):
                 print(f'\n🎁 {enemigo.nombre} dejó caer: {item_drop.nombre}')
                 mostrar_inventario(jugador)
             else:
-                print('\n:( No obtuviste ningún ítem esta vez...')
+                print('\n❗ No obtuviste ningún ítem esta vez...')
 
             break
 
@@ -123,4 +122,4 @@ def iniciar_combate(jugador, enemigo):
             break
 
         turno += 1
-        input('\nPresiona ENTER para continuar...')
+        input('\n🎮 Presiona ENTER para continuar...')
