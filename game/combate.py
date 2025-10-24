@@ -1,5 +1,10 @@
+#Sistema de combate
+
 import random
-from utils.utilidades import elegir_item_random, mostrar_inventario
+from utils.inventario import mostrar_inventario
+from models.items import generar_item
+from config.game_settings import (
+    PROBABILIDAD_HUIR, PROBABILIDAD_ITEM, VIDA_PIZZA_INICIAL, REDUCCION_VIDA_PIZZA_POR_TURNO)
 
 
 def turno_jugador(jugador, enemigo):
@@ -8,7 +13,7 @@ def turno_jugador(jugador, enemigo):
         print('1️⃣ Atacar')
         print('2️⃣ Defender')
         print('3️⃣ Usar ítem')
-        print('4️⃣ Huir')
+        print('4️⃣ Intentar huir')
 
         opcion = input('ELige una opción: ')
 
@@ -17,12 +22,12 @@ def turno_jugador(jugador, enemigo):
             break
 
         elif opcion == '2':
-            print(f'{jugador.nombre} se Defiende! ¡Más fuerte ante daños!')
+            print(f'{jugador.nombre} se prepara para defenderse!')
             jugador.defendiendo = True
             break
 
         elif opcion == '3':
-            if jugador.inventario:
+            if len(jugador.inventario) > 0:
                 mostrar_inventario(jugador)
                 try:
                     nro_i = int(input('Selecciona número de ítem para usar (0 para cancelar): '))
@@ -36,7 +41,7 @@ def turno_jugador(jugador, enemigo):
                 except ValueError:
                     print('Entrada inválida.')
             else:
-                print('No tienes Ítems aún.')
+                print('No tienes Ítems en tu inventario.')
             break
 
         elif opcion == '4':
@@ -68,30 +73,33 @@ def turno_enemigo(jugador, enemigo):
 
 def intentar_huir():
     #probabilidad de huir
-    return random.random() < 0.5
+    return random.random() < PROBABILIDAD_HUIR
 
 
 def iniciar_combate(jugador, enemigo):
     print(f'⚔️ ¡COMBATE! {enemigo.nombre}')
+    print(f'🍕 vs 👹')
     turno = 1
-    vida_pizza = 100
+    vida_pizza = VIDA_PIZZA_INICIAL
 
     while jugador.con_vida() and enemigo.con_vida():
         print(f'\n--- Turno {turno} ---')
         print(f'Vida 🍕: {vida_pizza}')
         print(f'👤 {jugador.nombre} | ️Vida: {jugador.vida}/{jugador.vidamax}')
-        print(f'👹 {enemigo.nombre} | Vida: {enemigo.vida}/{enemigo.vidamax}')
+        print(f'👹 {enemigo.nombre} | Vida: {enemigo.vida}')
 
         turno_jugador(jugador, enemigo)
+
         if not enemigo.con_vida():
-            print(f'\n⚔️ {jugador.nombre} derrotó a {enemigo.nombre} y ganó {enemigo.experiencia} EXP.')
+            print(f'\n⚔️ ¡{jugador.nombre} derrotó a {enemigo.nombre}!')
+            print(f'Ganaste {enemigo.experiencia} puntos de EXP.')
             jugador.ganar_experiencia(enemigo.experiencia)
 
             # probabilidad de item
-            if random.random() < 0.6:
-                item_drop = elegir_item_random()
+            if random.random() < PROBABILIDAD_ITEM:
+                item_drop = generar_item()
                 jugador.inventario.append(item_drop)
-                print(f'\n🎁 {enemigo.nombre} dejó: {item_drop.nombre}')
+                print(f'\n🎁 {enemigo.nombre} dejó caer: {item_drop.nombre}')
                 mostrar_inventario(jugador)
             else:
                 print('\n:( No obtuviste ningún ítem esta vez...')
@@ -99,13 +107,17 @@ def iniciar_combate(jugador, enemigo):
             break
 
         turno_enemigo(jugador, enemigo)
+
         if not jugador.con_vida():
             print(f'\n💀 {jugador.nombre} ha caído en combate...')
+            print('🍕 La pizza nunca llegará a su destino.')
             break
 
-        vida_pizza -= 5
+        vida_pizza -= REDUCCION_VIDA_PIZZA_POR_TURNO
         if vida_pizza <= 0:
             print('\n❌ La pizza se ha enfriado demasiado. Perdiste :(')
+            jugador.vida = 0
             break
 
         turno += 1
+        input('\nPresiona ENTER para continuar...')

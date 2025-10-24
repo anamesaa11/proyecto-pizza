@@ -1,9 +1,12 @@
+#Enemigos del juego
+
 import random
-from personajes import Personaje
+from models.personajes import Personaje
+from config.game_data import ENEMIGOS_DATA
 
 
 class Enemigo(Personaje):
-    def __init__(self, nombre, nivel, vida, fuerza, defensa, velocidad, experiencia, comportamiento, habilidad=None):
+    def __init__(self, nombre, nivel, vida, fuerza, defensa, velocidad, experiencia, comportamiento, habilidad):
         super().__init__(nombre=nombre,
                          vida=vida,
                          fuerza=fuerza,
@@ -14,7 +17,7 @@ class Enemigo(Personaje):
                          habilidad=habilidad)
         self.comportamiento = comportamiento
 
-    #Sobreescribir atacar
+    #Ataque con variación de daño
     def atacar(self, jugador):
         dano_base = self.fuerza
         dano_final = random.randint(int(dano_base*0.8), int(dano_base*1.2))
@@ -29,25 +32,23 @@ class Enemigo(Personaje):
 
 
 def obtener_enemigos(maz):
-    if maz == 1:
-        return [
-            Enemigo(nombre='Ladrón🗡️', nivel=1, vida=25, fuerza=7, defensa=3, velocidad=10,
-                    experiencia=15, comportamiento='Escurridizo', habilidad='Cuchilla rápida'),
-            Enemigo(nombre='Hambriento🍗', nivel=1, vida=40, fuerza=10, defensa=5, velocidad=6,
-                    experiencia=20, comportamiento='Desesperado', habilidad='Golpe con Huesos')
-            ]
-    elif maz == 2:
-        return [
-            Enemigo(nombre='Duende💰', nivel=2, vida=50, fuerza=12, defensa=7, velocidad=15,
-                    experiencia=40, comportamiento='Tramposo', habilidad='Lluvia de Monedas'),
-            Enemigo(nombre='Ogro💪', nivel=2, vida=70, fuerza=15, defensa=10, velocidad=4,
-                    experiencia=50, comportamiento='Tramposo', habilidad='Pisotón')
-            ]
-    elif maz == 3:
-        return [Enemigo(nombre='Águila Gigante🦅', nivel=3, vida=60, fuerza=18, defensa=8, velocidad=25,
-                        experiencia=70, comportamiento='Veloz', habilidad='Picoteo'),
-                Enemigo(nombre='Dragón🔥', nivel=3, vida=150, fuerza=30, defensa=20, velocidad=25,
-                        experiencia=200, comportamiento='Final', habilidad='Fuego')
-                ]
-    else:
-        raise ValueError('Número de mazmorra inválido')
+    if maz not in ENEMIGOS_DATA:
+        raise ValueError(f'Número de mazmorra inválido: {maz}')
+
+    enemigos = []
+
+    for datos in ENEMIGOS_DATA[maz]:
+        enemigo = Enemigo(
+                nombre=datos["nombre"],
+                nivel=datos["nivel"],
+                vida=datos["vida"],
+                fuerza=datos["fuerza"],
+                defensa=datos["defensa"],
+                velocidad=datos["velocidad"],
+                experiencia=datos["experiencia"],
+                comportamiento=datos["comportamiento"],
+                habilidad=datos["habilidad"]
+        )
+        enemigos.append(enemigo)
+
+    return enemigos
