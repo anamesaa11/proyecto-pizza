@@ -1,5 +1,5 @@
 import random
-from utilidades import elegir_item_random, mostrar_inventario
+from utils.utilidades import elegir_item_random, mostrar_inventario
 
 
 def turno_jugador(jugador, enemigo):

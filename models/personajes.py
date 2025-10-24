@@ -1,3 +1,4 @@
+#Clase Base Personaje
 class Personaje:
     def __init__(self, nombre, vida, fuerza, defensa, velocidad, experiencia=0, nivel=1, habilidad=None):
         self.nombre = nombre
@@ -14,7 +15,7 @@ class Personaje:
     def con_vida(self):
         return self.vida > 0
     
-    def recibir_dano(self, cantidad: int):
+    def recibir_dano(self, cantidad):
         dano_recibido = max(0, cantidad - self.defensa)
         self.vida -= dano_recibido
         if self.vida < 0:
@@ -22,12 +23,18 @@ class Personaje:
         print(f'- {self.nombre} recibe {dano_recibido} de daño')
         
         if self.vida == 0:
-            print(f'{self.nombre} ha sido eliminado.')
+            print(f'💀 {self.nombre} ha sido eliminado.')
 
     def atacar(self, objetivo):
         dano_base = self.fuerza
         print(f'\n⚔️ {self.nombre} ataca a {objetivo.nombre}. | Causa {dano_base} de daño.')
         objetivo.recibir_dano(dano_base)
+
+    def curar(self, cantidad: int):
+        self.vida += cantidad
+        if self.vida > self.vidamax:
+            self.vida = self.vidamax
+        print(f'❤️ {self.nombre} recupera {cantidad} de vida | Vida actual: {self.vida}')
 
     def mostrar_estado(self):
         print('-- ESTADO DEL PERSONAJE --')
@@ -35,9 +42,3 @@ class Personaje:
         print(f'Vida: {self.vida} / {self.vidamax}')
         print(f'Nivel: {self.nivel} | EXP {self.experiencia}')
         print(f'Fuerza: {self.fuerza} | Defensa: {self.defensa} | Velocidad: {self.velocidad}')
-
-    def curar(self, cantidad: int):
-        self.vida += cantidad
-        if self.vida > self.vidamax:
-            self.vida = self.vidamax
-        print(f'{self.nombre} recupera {cantidad} de vida | Vida actual: {self.vida}')
