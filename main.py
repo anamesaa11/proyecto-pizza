@@ -30,7 +30,7 @@ def jugar_mazmorra(maz):
             print('🏃 Saliste de la mapa.')
             break
 
-        jugador_pos = mover_jugador(mov, jugador_pos, mapa, suelo_actual)
+        jugador_pos = mover_jugador(mov, jugador_pos, mapa, escenario)
 
         #Combate
         for (ex, ey, enemigo, es_objetivo) in enemigos_colocados:

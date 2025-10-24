@@ -1,4 +1,7 @@
 import random
+import os
+import sys
+import time
 from items import lista_items
 
 
@@ -27,17 +30,18 @@ def usar_item_inventario(personaje, indice):
 
 
 def limpiar_pantalla():
-    """simula limpiar consola (portátil para Windows/Linux)."""
-    import os
-    os.system("cls" if os.name == "nt" else "clear")
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+    sys.stdout.write("\033[H\033[J")
+    sys.stdout.flush()
 
 
 def mostrar_texto_lento(texto, velocidad=0.03):
     """imprime texto como narración (efecto RPG)."""
-    import sys, time
     for char in texto:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(velocidad)
     print()
-

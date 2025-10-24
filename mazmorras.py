@@ -50,10 +50,16 @@ def mostrar_mapa(mapa, posicion_jugador):
     print()
 
 
-def mover_jugador(direccion, posicion, mapa, suelo_actual):
+def mover_jugador(direccion, posicion, mapa, escenario):
     x, y = posicion
     max_x, max_y = len(mapa), len(mapa[0])
-    mapa[x][y] = suelo_actual
+    suelo = escenario["suelo"]
+    relleno = escenario["relleno"]
+
+    if mapa[x][y] == "🍕" or mapa[x][y] == suelo:
+        mapa[x][y] = suelo
+    else:
+        mapa[x][y] = relleno
 
     if direccion == "w" and x > 0:
         x -= 1
@@ -79,7 +85,8 @@ def generar_enemigos_en_mapa(maz, mapa):
     posiciones_ocupadas = set()
 
     #Define posiciones del camino
-    posiciones_camino = [(i, j) for i in range(filas) for j in range(columnas) if mapa[i][j] == "🛣️"]
+    posiciones_camino = [(i, j) for i in range(filas) for j in range(columnas)
+                         if mapa[i][j] in ["🛣️", "🌳", "☁️", "🏰"]]
 
     for _ in range(cantidad):
         enemigo_base = random.choice(enemigos_disponibles)
